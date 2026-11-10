@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using the BIDS schema &mdash; bids-matlab v0.3.0
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19ed39ba"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/mat_urls.js?v=fdbe6872"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Performance" href="performance.html" />
+    <link rel="prev" title="Variable transformations" href="variable_transformations.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            bids-matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="general_information.html">BIDS for MATLAB / Octave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layout_query.html">Indexing and querying a BIDS dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file.html">BIDS file handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats_model.html">BIDS stats model handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variable_transformations.html">Variable transformations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using the BIDS schema</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mat-+bids/Schema.m"><code class="docutils literal notranslate"><span class="pre">Schema</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developper_doc/index.html">Documentation for developers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">bids-matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Using the BIDS schema</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/schema.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-the-bids-schema">
+<h1>Using the BIDS schema<a class="headerlink" href="#using-the-bids-schema" title="Link to this heading"></a></h1>
+<dl class="mat folder">
+<dt class="sig sig-object mat" id="mat-+bids/">
+<span class="property"><span class="pre">namespace</span> </span><span class="sig-name descname"><span class="pre">bids</span></span><a class="headerlink" href="mat/name/bids.html" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m">
+<span class="property"><span class="pre">class</span> </span><span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">Schema</span></span><a class="headerlink" href="mat/name/bids.Schema.html" title="Link to this definition"></a></dt>
+<dd><p>Class to interact with the BIDS schema</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">bids</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span><span class="n">use_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>use_schema: logical</p>
+<div class="members docutils container">
+<dl>
+<dt>Constructor Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.Schema">
+<span class="sig-name descname"><span class="pre">Schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">use_schema</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.Schema.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">bids</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span><span class="n">use_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>use_schema: logical</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">use_schema</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.load.html" title="Link to this definition"></a></dt>
+<dd><p>Load schema.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">bids</span><span class="o">.</span><span class="n">Schema</span><span class="p">()</span>
+<span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_entities">
+<span class="sig-name descname"><span class="pre">return_entities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_entities.html" title="Link to this definition"></a></dt>
+<dd><p>Return all the entities for or one or more datatype and one or more suffixes.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entities</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">return_entities</span><span class="p">(</span><span class="s1">'datatypes'</span><span class="p">,</span> <span class="n">datatypes</span><span class="p">,</span> <span class="o">...</span>
+                                  <span class="s1">'suffixes'</span><span class="p">,</span> <span class="n">suffixes</span><span class="p">,</span> <span class="o">...</span>
+                                  <span class="s1">'required_only'</span><span class="p">,</span> <span class="n">false</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>datatypes</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">cellstr</span></code></span>) – For example <code class="docutils literal notranslate"><span class="pre">'func'</span></code>.</p></li>
+<li><p><strong>suffixes</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">cellstr</span></code></span>) – For example <code class="docutils literal notranslate"><span class="pre">'bold'</span></code>.</p></li>
+<li><p><strong>required_only</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – If true, only the required entities are returned.</p></li>
+</ul>
+</dd>
+</dl>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">suffixes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">return_entities</span><span class="p">(</span><span class="s">'datatypes'</span><span class="p">,</span><span class="w"> </span><span class="s">'func'</span><span class="p">)</span>
+<span class="n">suffixes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">return_entities</span><span class="p">(</span><span class="s">'datatypes'</span><span class="p">,</span><span class="w"> </span><span class="s">'func'</span><span class="p">,</span><span class="w"> </span><span class="s">'suffixes'</span><span class="p">,</span><span class="w"> </span><span class="s">'bold'</span><span class="p">)</span>
+<span class="n">suffixes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">return_suffixes</span><span class="p">(</span><span class="s">'datatypes'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">'anat'</span><span class="p">,</span><span class="w"> </span><span class="s">'func'</span><span class="p">},</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                                  </span><span class="s">'suffixes'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">'T1w'</span><span class="p">,</span><span class="w"> </span><span class="s">'bold'</span><span class="p">},</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                                  </span><span class="s">'required_only'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_modalities">
+<span class="sig-name descname"><span class="pre">return_modalities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">subject</span></em>, <em class="sig-param"><span class="pre">modality_group</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_modalities.html" title="Link to this definition"></a></dt>
+<dd><p>Return the datatypes for a given for a given modality group for a given subject.
+For example, “mri” will give: “func”, “anat”, “dwi”, “fmap”…</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">modalities</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">return_modalities</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">modality_group</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subject</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">struct</span></code></span>) – Subject information: <code class="docutils literal notranslate"><span class="pre">subject.path</span></code>, …
+See <code class="docutils literal notranslate"><span class="pre">parse_subject</span></code> subfunction for layout.m for details.</p></li>
+<li><p><strong>modality_group</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – Any of the BIDS modality</p></li>
+</ul>
+</dd>
+</dl>
+<p>If we go schema-less, we list directories in the subject/session folder
+as proxy of the datatypes that we have to parse.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.entity_order">
+<span class="sig-name descname"><span class="pre">entity_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.entity_order.html" title="Link to this definition"></a></dt>
+<dd><p>Return the ‘correct’ order for entities of entity list.</p>
+<p>If there are non BIDS entities they are added
+after the BIDS ones in alphabetical order.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">order</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">entity_order</span><span class="p">(</span><span class="n">entity_list</span><span class="p">,</span> <span class="s1">'use_short_form'</span><span class="p">,</span> <span class="n">true</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id1">
+<h2>Example<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">Schema</span><span class="p">();</span>
+
+<span class="c">%  get the order of all the BIDS entities</span>
+<span class="n">order</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">entity_order</span><span class="p">()</span>
+
+<span class="c">% reorder typical BIDS entities</span>
+<span class="n">entity_list_to_order</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="s">'description'</span>
+<span class="w">                        </span><span class="s">'run'</span>
+<span class="w">                        </span><span class="s">'subject'</span><span class="p">};</span>
+<span class="n">order</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">entity_order</span><span class="p">(</span><span class="n">entity_list_to_order</span><span class="p">)</span>
+
+<span class="w">    </span><span class="p">{</span><span class="s">'subject'</span>
+<span class="w">     </span><span class="s">'run'</span>
+<span class="w">     </span><span class="s">'description'</span><span class="p">};</span>
+
+<span class="c">% reorder non-BIDS and typical BIDS entities</span>
+<span class="n">entity_list_to_order</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="s">'description'</span>
+<span class="w">                        </span><span class="s">'run'</span>
+<span class="w">                        </span><span class="s">'foo'</span>
+<span class="w">                        </span><span class="s">'subject'</span><span class="p">};</span>
+<span class="n">order</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">entity_order</span><span class="p">(</span><span class="n">entity_list_to_order</span><span class="p">)</span>
+
+<span class="w">    </span><span class="p">{</span><span class="s">'subject'</span>
+<span class="w">     </span><span class="s">'run'</span>
+<span class="w">     </span><span class="s">'description'</span>
+<span class="w">     </span><span class="s">'foo'</span><span class="p">};</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_entity_name">
+<span class="sig-name descname"><span class="pre">return_entity_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">entity_key</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_entity_name.html" title="Link to this definition"></a></dt>
+<dd><p>Return the name of an entity key.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entity_name</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">return_entity_key</span><span class="p">(</span><span class="n">entity_key</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id2">
+<h2>Example<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">key</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">return_entity_key</span><span class="p">(</span><span class="s">'desc'</span><span class="p">)</span>
+
+<span class="w">    </span><span class="s">'description'</span>
+
+
+<span class="n">key</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">return_entity_key</span><span class="p">({</span><span class="s">'desc'</span><span class="p">,</span><span class="w"> </span><span class="s">'sub'</span><span class="p">})</span>
+
+<span class="w">    </span><span class="p">{</span><span class="s">'description'</span><span class="p">;</span><span class="w"> </span><span class="s">'subject'</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_entity_key">
+<span class="sig-name descname"><span class="pre">return_entity_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">entity_names</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_entity_key.html" title="Link to this definition"></a></dt>
+<dd><p>Return the key of an entity.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">key</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">return_entity_key</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id3">
+<h2>Example<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">key</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">return_entity_key</span><span class="p">(</span><span class="s">'description'</span><span class="p">)</span>
+
+<span class="w">    </span><span class="s">'desc'</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_modality_groups">
+<span class="sig-name descname"><span class="pre">return_modality_groups</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_modality_groups.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">return_modality_groups</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns a dummy variable if we go schema less</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.list_suffix_groups">
+<span class="sig-name descname"><span class="pre">list_suffix_groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">datatype</span></em>, <em class="sig-param"><span class="pre">scope</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.list_suffix_groups.html" title="Link to this definition"></a></dt>
+<dd><p>Creates a structure of all the suffix group of a datatype.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">suffix_groups</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">list_suffix_groups</span><span class="p">(</span><span class="n">datatype</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>datatype</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – for example <code class="docutils literal notranslate"><span class="pre">'func'</span></code></p></li>
+<li><p><strong>scope</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – <code class="docutils literal notranslate"><span class="pre">'raw'</span></code> or <code class="docutils literal notranslate"><span class="pre">'derivatives'</span></code> or <code class="docutils literal notranslate"><span class="pre">'all'</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_suffix_groups_for_datatype">
+<span class="sig-name descname"><span class="pre">return_suffix_groups_for_datatype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">datatype</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_suffix_groups_for_datatype.html" title="Link to this definition"></a></dt>
+<dd><p>Returns a structure of all the suffix group of a datatype.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">suffix_groups</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">return_suffix_groups_for_datatype</span><span class="p">(</span><span class="n">datatype</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>datatype</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>)</p>
+</dd>
+</dl>
+<section id="id4">
+<h2>Example<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">suffix_groups</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">return_suffix_groups_for_datatype</span><span class="p">(</span><span class="s">'func'</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_entities_for_suffix_group">
+<span class="sig-name descname"><span class="pre">return_entities_for_suffix_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">suffix_group</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_entities_for_suffix_group.html" title="Link to this definition"></a></dt>
+<dd><p>Entities are returned in the expected order according to the schema.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entities</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">return_entities_for_suffix_group</span><span class="p">(</span><span class="n">suffix_group</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>suffix_group</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">struct</span></code></span>)</p>
+</dd>
+</dl>
+<section id="id5">
+<h2>Example<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">suffix_groups</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">return_suffix_groups_for_datatype</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">datatype</span><span class="p">)</span>
+<span class="n">entities</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">return_entities_for_suffix_group</span><span class="p">(</span><span class="n">suffix_groups</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.required_entities_for_suffix_group">
+<span class="sig-name descname"><span class="pre">required_entities_for_suffix_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">this_suffix_group</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.required_entities_for_suffix_group.html" title="Link to this definition"></a></dt>
+<dd><p>Return a logical vector to track which entities of a suffix group
+are required in the bids schema.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">required_entities</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">required_entities_for_suffix_group</span><span class="p">(</span><span class="n">this_suffix_group</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>this_suffix_group</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">struct</span></code></span>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.find_suffix_group">
+<span class="sig-name descname"><span class="pre">find_suffix_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">modality</span></em>, <em class="sig-param"><span class="pre">suffix</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.find_suffix_group.html" title="Link to this definition"></a></dt>
+<dd><p>For a given sufffix and modality, this return the “suffix group” this
+suffix belongs to.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">suffix_group</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">find_suffix_group</span><span class="p">(</span><span class="n">modality</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modality</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>)</p></li>
+<li><p><strong>suffix</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<section id="id6">
+<h2>Example<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">Schema</span><span class="p">();</span>
+<span class="n">suffix_group</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">find_suffix_group</span><span class="p">(</span><span class="s">'anat'</span><span class="p">,</span><span class="w"> </span><span class="s">'T1w'</span><span class="p">);</span>
+<span class="n">suffix_group</span>
+
+<span class="w">    </span><span class="s">'nonparametric'</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_suffixes">
+<span class="sig-name descname"><span class="pre">return_suffixes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_suffixes.html" title="Link to this definition"></a></dt>
+<dd><p>Return all the suffixes for or one or more datatype.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">suffixes</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">return_suffixes</span><span class="p">(</span><span class="s1">'datatypes'</span><span class="p">,</span> <span class="n">datatypes</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id7">
+<h2>Example<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">suffixes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">return_suffixes</span><span class="p">(</span><span class="s">'datatypes'</span><span class="p">,</span><span class="w"> </span><span class="s">'func'</span><span class="p">)</span>
+
+<span class="n">suffixes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">return_suffixes</span><span class="p">(</span><span class="s">'datatypes'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">'anat'</span><span class="p">,</span><span class="w"> </span><span class="s">'func'</span><span class="p">})</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_datatypes_for_suffix">
+<span class="sig-name descname"><span class="pre">return_datatypes_for_suffix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">suffix</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_datatypes_for_suffix.html" title="Link to this definition"></a></dt>
+<dd><p>For a given suffix, returns all the possible datatypes that have this suffix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>suffix</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>)</p>
+</dd>
+</dl>
+<section id="id8">
+<h2>Example<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">Schema</span><span class="p">();</span>
+<span class="n">datatypes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="n">return_datatypes_for_suffix</span><span class="p">(</span><span class="s">'bold'</span><span class="p">);</span>
+<span class="n">assertEqual</span><span class="p">(</span><span class="n">datatypes</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">'func'</span><span class="p">});</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_entities_for_suffix_modality">
+<span class="sig-name descname"><span class="pre">return_entities_for_suffix_modality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">suffix</span></em>, <em class="sig-param"><span class="pre">modality</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_entities_for_suffix_modality.html" title="Link to this definition"></a></dt>
+<dd><p>returns the list of entities for a given suffix of a given modality</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">entities</span><span class="p">,</span> <span class="n">required</span><span class="p">]</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">return_entities_for_suffix_modality</span><span class="p">(</span><span class="n">suffix</span><span class="p">,</span> <span class="n">modality</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modality</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>)</p></li>
+<li><p><strong>suffix</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_modality_suffixes_regex">
+<span class="sig-name descname"><span class="pre">return_modality_suffixes_regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">modality</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_modality_suffixes_regex.html" title="Link to this definition"></a></dt>
+<dd><p>creates a regular expression of suffixes for a given imaging modality</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reg_ex</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">return_modality_suffixes_regex</span><span class="p">(</span><span class="n">modality</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>modality</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_modality_extensions_regex">
+<span class="sig-name descname"><span class="pre">return_modality_extensions_regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">modality</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_modality_extensions_regex.html" title="Link to this definition"></a></dt>
+<dd><p>creates a regular expression of extensions for a given imaging modality</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reg_ex</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">return_modality_regex</span><span class="p">(</span><span class="n">modality</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>modality</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.return_modality_regex">
+<span class="sig-name descname"><span class="pre">return_modality_regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">modality</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.return_modality_regex.html" title="Link to this definition"></a></dt>
+<dd><p>creates a regular expression of suffixes and extension for a given imaging modality</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>modality</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.get_definition">
+<span class="sig-name descname"><span class="pre">get_definition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">word</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.get_definition.html" title="Link to this definition"></a></dt>
+<dd><p>finds definition of a column header in a the BIDS schema</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">def</span><span class="p">,</span> <span class="n">status</span><span class="p">]</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">get_definition</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat staticmethod">
+<dt class="sig sig-object mat" id="mat-+bids/Schema.m.ci_check">
+<span class="property"><span class="pre">static</span> </span><span class="sig-name descname"><span class="pre">ci_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">variable_to_check</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Schema.ci_check.html" title="Link to this definition"></a></dt>
+<dd><p>Mostly to avoid some crash in continuous integration</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="variable_transformations.html" class="btn btn-neutral float-left" title="Variable transformations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="performance.html" class="btn btn-neutral float-right" title="Performance" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, BIDS-MATLAB developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

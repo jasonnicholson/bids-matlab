@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indexing and querying a BIDS dataset &mdash; bids-matlab v0.3.0
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19ed39ba"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/mat_urls.js?v=fdbe6872"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="BIDS file handling" href="file.html" />
+    <link rel="prev" title="BIDS for MATLAB / Octave" href="general_information.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            bids-matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="general_information.html">BIDS for MATLAB / Octave</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Indexing and querying a BIDS dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file.html">BIDS file handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats_model.html">BIDS stats model handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variable_transformations.html">Variable transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schema.html">Using the BIDS schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developper_doc/index.html">Documentation for developers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">bids-matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Indexing and querying a BIDS dataset</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/layout_query.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="indexing-and-querying-a-bids-dataset">
+<h1>Indexing and querying a BIDS dataset<a class="headerlink" href="#indexing-and-querying-a-bids-dataset" title="Link to this heading"></a></h1>
+<p>BIDS-Matlab allows you to index a raw or derivative BIDS dataset with <a class="reference internal" href="#mat-+bids/layout.m" title="bids.layout"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">bids.layout</span></code></a>,
+and then query the content of that dataset with <a class="reference internal" href="#mat-+bids/query.m" title="bids.query"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">bids.query</span></code></a>.</p>
+<p>The general API of these functions is detailed below.</p>
+<p>For an example on how to use them, check out
+<a class="reference external" href="https://github.com/bids-standard/bids-matlab/blob/main/demos/notebooks/BIDS-Matlab_01_basics.ipynb">this jupyter notebook</a>.</p>
+<dl class="mat folder">
+<dt class="sig sig-object mat" id="mat-+bids/">
+<span class="property"><span class="pre">namespace</span> </span><span class="sig-name descname"><span class="pre">bids</span></span><a class="headerlink" href="mat/name/bids.html" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/layout.m">
+<span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">layout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.layout.html" title="Link to this definition"></a></dt>
+<dd><p>Parse a directory structure formatted according to the BIDS standard</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BIDS</span> <span class="o">=</span> <span class="n">bids</span><span class="o">.</span><span class="n">layout</span><span class="p">(</span><span class="n">pwd</span><span class="p">,</span> <span class="o">...</span>
+                   <span class="s1">'use_schema'</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="o">...</span>
+                   <span class="s1">'index_derivatives'</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="o">...</span>
+                   <span class="s1">'index_dependencies'</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="o">...</span>
+                   <span class="s1">'filter'</span><span class="p">,</span> <span class="n">struct</span><span class="p">([]),</span> <span class="o">...</span>
+                   <span class="s1">'tolerant'</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="o">...</span>
+                   <span class="s1">'verbose'</span><span class="p">,</span> <span class="n">false</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – directory of the dataset formatted according to BIDS
+[default: <code class="docutils literal notranslate"><span class="pre">pwd</span></code>]</p></li>
+<li><p><strong>use_schema</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the parsing of the dataset
+will follow the bids-schema provided with bids-matlab.
+If set to <code class="docutils literal notranslate"><span class="pre">false</span></code> files just have to be of the form
+<code class="docutils literal notranslate"><span class="pre">sub-label_[entity-label]_suffix.ext</span></code> to be parsed.</p></li>
+<li><p><strong>index_derivatives</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – if <code class="docutils literal notranslate"><span class="pre">true</span></code> this will index the content of the
+any <code class="docutils literal notranslate"><span class="pre">derivatives</span></code> folder in the BIDS dataset.</p></li>
+<li><p><strong>index_dependencies</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – if <code class="docutils literal notranslate"><span class="pre">true</span></code> this will index the explicit dependencies
+(with “IntendedFor” in json files)</p></li>
+<li><p><strong>filter</strong> (struct with optional fields <code class="docutils literal notranslate"><span class="pre">sub</span></code>, <code class="docutils literal notranslate"><span class="pre">ses</span></code>, <code class="docutils literal notranslate"><span class="pre">modality</span></code>.
+Regular expression can be used for <code class="docutils literal notranslate"><span class="pre">sub</span></code> and <code class="docutils literal notranslate"><span class="pre">ses</span></code>.) – Can be used to index only a subset of the dataset.</p></li>
+<li><p><strong>tolerant</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to turn validation errors into warnings</p></li>
+<li><p><strong>verbose</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to get more feedback</p></li>
+</ul>
+</dd>
+</dl>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">BIDS</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">layout</span><span class="p">(</span><span class="nb">fullfile</span><span class="p">(</span><span class="n">get_test_data_dir</span><span class="p">(),</span><span class="w"> </span><span class="s">'7t_trt'</span><span class="p">),</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                   </span><span class="s">'use_schema'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                   </span><span class="s">'verbose'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                   </span><span class="s">'index_derivatives'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                   </span><span class="s">'filter'</span><span class="p">,</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">'sub'</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s">'^0[12]'</span><span class="p">}},</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                                    </span><span class="s">'modality'</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s">'anat'</span><span class="p">,</span><span class="w"> </span><span class="s">'func'</span><span class="p">}},</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                                    </span><span class="s">'ses'</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s">'1'</span><span class="p">,</span><span class="w"> </span><span class="s">'2'</span><span class="p">}}));</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/query.m">
+<span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">BIDS</span></em>, <em class="sig-param"><span class="pre">query</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.query.html" title="Link to this definition"></a></dt>
+<dd><p>Queries a directory structure formatted according to the BIDS standard</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">bids</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="nb">filter</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>BIDS</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">structure</span> <span class="pre">or</span> <span class="pre">char</span></code></span>) – BIDS directory name or BIDS structure (from bids.layout)</p></li>
+<li><p><strong>query</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – type of query (see list below)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Type of queries allowed.</p>
+<p>Any of the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'modalities'</span></code>: known as datatype in BIDS (anat, func, eeg…)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'entities'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'suffixes'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'data'</span></code>: filenames</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'metadata'</span></code>: associated metadata (using the inheriance principle)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'metafiles'</span></code>: json sidecar files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'dependencies'</span></code>: associated files (for example the event.tsv for a bold.nii
+or eeg.eeg file)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'participants'</span></code>: content and metadata of participants.tsv</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'phenotype'</span></code>: content and metadata of the phenotype folder</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'extensions'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'tsv_content'</span></code></p></li>
+</ul>
+<p>And any of the BIDS entities:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'acquisitions'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'atlases'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'ceagents'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'chunks'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'densities'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'descriptions'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'directions'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'echos'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'flips'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'hemispheres'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'inversions'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'labels'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'mtransfers'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'parts'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'processings'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'reconstructions'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'recordings'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'resolutions'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'sessions'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'subjects'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'runs'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'samples'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'spaces'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'splits'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'stains'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'tasks'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'tracers'</span></code></p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that most of the query types are plurals.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filter</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">structure</span> <span class="pre">or</span> <span class="pre">nX2</span> <span class="pre">cell</span> <span class="pre">or</span> <span class="pre">series</span> <span class="pre">of</span> <span class="pre">key-value</span> <span class="pre">parameters</span></code></span>) – filter for the query</p>
+</dd>
+</dl>
+<p>The choice of available keys to filter with includes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'suffix'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'extension'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'prefix'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'modality'</span></code></p></li>
+</ul>
+<p>It can also include any of the entity keys present in the files in the dataset.
+To know what those are, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bids</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span> <span class="s1">'entities'</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that integers as query label for the entity keys listed below:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'run'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'flip'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'inv'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'split'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'echo'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'chunk'</span></code></p></li>
+</ul>
+</div></blockquote>
+</div>
+<p>If you want to exclude an entity, use <code class="docutils literal notranslate"><span class="pre">''</span></code> or <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
+<p>It is possible to use regular expressions in the queried values.</p>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>Querying for ‘BOLD’ files for subject ‘01’, for run 1 to 5
+of the ‘stopsignalwithpseudowordnaming’ task
+with gunzipped nifti files.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span><span class="w"> </span><span class="s">'data'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'sub'</span><span class="p">,</span><span class="w"> </span><span class="s">'01'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'task'</span><span class="p">,</span><span class="w"> </span><span class="s">'stopsignalwithpseudowordnaming'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'run'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'extension'</span><span class="p">,</span><span class="w"> </span><span class="s">'.nii.gz'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'suffix'</span><span class="p">,</span><span class="w"> </span><span class="s">'bold'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Same as above but using a filter structure.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">filters</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">'sub'</span><span class="p">,</span><span class="w"> </span><span class="s">'01'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                 </span><span class="s">'task'</span><span class="p">,</span><span class="w"> </span><span class="s">'stopsignalwithpseudowordnaming'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                 </span><span class="s">'run'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                 </span><span class="s">'extension'</span><span class="p">,</span><span class="w"> </span><span class="s">'.nii.gz'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                 </span><span class="s">'suffix'</span><span class="p">,</span><span class="w"> </span><span class="s">'bold'</span><span class="p">);</span>
+
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span><span class="w"> </span><span class="s">'data'</span><span class="p">,</span><span class="w"> </span><span class="n">filters</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Same as above but using regular expression
+to query for subjects 1 to 5.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">filters</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="s">'sub'</span><span class="p">,</span><span class="w"> </span><span class="s">'0[1-5]'</span><span class="p">;</span><span class="w"> </span><span class="k">...</span>
+<span class="w">           </span><span class="s">'task'</span><span class="p">,</span><span class="w"> </span><span class="s">'stopsignal.*'</span><span class="p">;</span><span class="w"> </span><span class="k">...</span>
+<span class="w">           </span><span class="s">'run'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="k">...</span>
+<span class="w">           </span><span class="s">'extension'</span><span class="p">,</span><span class="w"> </span><span class="s">'.nii.*'</span><span class="p">;</span><span class="w"> </span><span class="k">...</span>
+<span class="w">           </span><span class="s">'suffix'</span><span class="p">,</span><span class="w"> </span><span class="s">'bold'</span><span class="p">};</span>
+
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span><span class="w"> </span><span class="s">'data'</span><span class="p">,</span><span class="w"> </span><span class="n">filters</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The following query would return all files that do not contain the
+task entity.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span><span class="w"> </span><span class="s">'data'</span><span class="p">,</span><span class="w"> </span><span class="s">'task'</span><span class="p">,</span><span class="w"> </span><span class="s">''</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="general_information.html" class="btn btn-neutral float-left" title="BIDS for MATLAB / Octave" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="file.html" class="btn btn-neutral float-right" title="BIDS file handling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, BIDS-MATLAB developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,903 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variable transformations &mdash; bids-matlab v0.3.0
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19ed39ba"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/mat_urls.js?v=fdbe6872"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using the BIDS schema" href="schema.html" />
+    <link rel="prev" title="BIDS stats model handling" href="stats_model.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            bids-matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="general_information.html">BIDS for MATLAB / Octave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layout_query.html">Indexing and querying a BIDS dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file.html">BIDS file handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats_model.html">BIDS stats model handling</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Variable transformations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#applying-transformations">Applying transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-operations">Basic operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logical-operations">Logical operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#munge-operations">Munge operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#assign">Assign</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#concatenate">Concatenate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#copy">Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delete">Delete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dropna">DropNA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#factor">Factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filter">Filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#label-identical-rows">Label identical rows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#merge-identical-rows">Merge identical rows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#replace">Replace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#select">Select</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#split">Split</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#compute-operations">Compute operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#constant">Constant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mean">Mean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#product">Product</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scale">Scale</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#std">Std</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sum">Sum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#threshold">Threshold</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="schema.html">Using the BIDS schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developper_doc/index.html">Documentation for developers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">bids-matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Variable transformations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/variable_transformations.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="variable-transformations">
+<h1>Variable transformations<a class="headerlink" href="#variable-transformations" title="Link to this heading"></a></h1>
+<p>Those transformers are meant to be used to manipulate the content of TSV files
+once loaded as structure with <code class="docutils literal notranslate"><span class="pre">bids.util.tsvread</span></code>.</p>
+<p>They are mostly meant to be used to implement the transformations
+described in BIDS stats models
+but can also be used to manipulate TSV files in batches.</p>
+<p>More information on how they function can be found
+in the <a class="reference external" href="https://github.com/bids-standard/variable-transform">variable-transform repository</a>.</p>
+<p>The behavior and their “call” in JSON should (hopefully) be fairly close to the
+<a class="reference external" href="https://docs.google.com/document/d/1uxN6vPWbC7ciAx2XWtT5Y-lBrdckZKpPdNUNpwRxHoU/">pybids-transformers</a>.</p>
+<section id="applying-transformations">
+<h2>Applying transformations<a class="headerlink" href="#applying-transformations" title="Link to this heading"></a></h2>
+<p>An “array” of transformations can be applied one after the other using
+<code class="docutils literal notranslate"><span class="pre">bids.transformers()</span></code>.</p>
+<dl class="mat folder">
+<dt class="sig sig-object mat" id="mat-+bids/">
+<span class="property"><span class="pre">namespace</span> </span><span class="sig-name descname"><span class="pre">bids</span></span><a class="headerlink" href="mat/name/bids.html" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/transformers.m">
+<span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">transformers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers.html" title="Link to this definition"></a></dt>
+<dd><p>Apply transformers to a structure.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_content</span> <span class="o">=</span> <span class="n">transformers</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transformers</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">structure</span></code></span>)</p></li>
+<li><p><strong>data</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">structure</span></code></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">new_content<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(structure)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">json<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(structure) json equivalent of the transformers</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p>
+</dd>
+</dl>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">tsvread</span><span class="p">(</span><span class="n">path_to_tsv</span><span class="p">);</span>
+
+<span class="c">% load transformation instruction from a model file</span>
+<span class="n">bm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">Model</span><span class="p">(</span><span class="s">'file'</span><span class="p">,</span><span class="w"> </span><span class="n">model_file</span><span class="p">);</span>
+<span class="n">transformers</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bm</span><span class="p">.</span><span class="n">get_transformations</span><span class="p">(</span><span class="s">'Level'</span><span class="p">,</span><span class="w"> </span><span class="s">'Run'</span><span class="p">);</span>
+
+<span class="c">% apply transformers</span>
+<span class="n">new_content</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">transformers</span><span class="p">(</span><span class="n">transformers</span><span class="p">.</span><span class="n">Instructions</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="c">% if all fields in the structure have the same number of rows one</span>
+<span class="c">% create a new tsv file</span>
+<span class="n">bids</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">tsvwrite</span><span class="p">(</span><span class="n">path_to_new_tsv</span><span class="p">,</span><span class="w"> </span><span class="n">new_content</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See also: bids.Model</p>
+</section>
+</dd></dl>
+
+<dl class="mat folder">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/">
+<span class="property"><span class="pre">namespace</span> </span><span class="sig-name descname"><span class="pre">bids.transformers_list</span></span><a class="headerlink" href="mat/name/bids.transformers_list.html" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="basic-operations">
+<h2>Basic operations<a class="headerlink" href="#basic-operations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add</p></li>
+<li><p>Subtract</p></li>
+<li><p>Multiply</p></li>
+<li><p>Divide</p></li>
+<li><p>Power</p></li>
+</ul>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Basic.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Basic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Basic.html" title="Link to this definition"></a></dt>
+<dd><p>Performs a basic operation with a <code class="docutils literal notranslate"><span class="pre">Value</span></code> on the <code class="docutils literal notranslate"><span class="pre">Input</span></code></p>
+<p>Each of these transformations takes one or more columns,
+and performs a mathematical operation on the input column and a provided operand.
+The operations are performed on each column independently.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Name</strong> – <strong>mandatory</strong>.  Any of <code class="docutils literal notranslate"><span class="pre">Add</span></code>, <code class="docutils literal notranslate"><span class="pre">Subtract</span></code>, <code class="docutils literal notranslate"><span class="pre">Multiply</span></code>, <code class="docutils literal notranslate"><span class="pre">Divide</span></code>, <code class="docutils literal notranslate"><span class="pre">Power</span></code>.</p></li>
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>.  A array of columns to perform operation on.</p></li>
+<li><p><strong>Value</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">float</span></code></span>) – <strong>mandatory</strong>.  The value to perform operation with (i.e. operand).</p></li>
+<li><p><strong>Query</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – Optional. logical expression used to select on which rows to
+act.</p></li>
+<li><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – Optional. List of column names to write out to.</p></li>
+</ul>
+</dd>
+</dl>
+<p>By default, computation is done in-place on the input
+(meaning that input columns are overwritten).
+If provided, the number of values must exactly match the number of input values,
+and the order will be mapped 1-to-1.</p>
+</dd></dl>
+
+</section>
+<section id="logical-operations">
+<h2>Logical operations<a class="headerlink" href="#logical-operations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>And</p></li>
+<li><p>Or</p></li>
+<li><p>Not</p></li>
+</ul>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Logical.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Logical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Logical.html" title="Link to this definition"></a></dt>
+<dd><p>Each of these transformations:</p>
+<ul class="simple">
+<li><p>takes 2 or more columns as input</p></li>
+<li><p>performs the corresponding logical operation</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>inclusive or</p></li>
+<li><p>conjunction</p></li>
+<li><p>logical negation</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>returning a single column as output.</p></li>
+</ul>
+<p>If non-logical input are passed, it is expected that:</p>
+<ul class="simple">
+<li><p>all zero or nan (for numeric data types),</p></li>
+<li><p>“NaN” or empty (for char) values</p></li>
+</ul>
+<p>will evaluate to false and all other values will evaluate to true.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Name</strong> – <strong>mandatory</strong>.  Any of <code class="docutils literal notranslate"><span class="pre">And</span></code>, <code class="docutils literal notranslate"><span class="pre">Or</span></code>, <code class="docutils literal notranslate"><span class="pre">Not</span></code>.</p></li>
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array</span></code></span>) – <strong>mandatory</strong>.  An array of columns to perform operation on. Only 1 for <code class="docutils literal notranslate"><span class="pre">Not</span></code></p></li>
+<li><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – Optional. The name of the output column.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="munge-operations">
+<h2>Munge operations<a class="headerlink" href="#munge-operations" title="Link to this heading"></a></h2>
+<p>Transformations that primarily involve manipulating/munging variables into
+other formats or shapes.</p>
+<section id="assign">
+<h3>Assign<a class="headerlink" href="#assign" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Assign.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Assign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Assign.html" title="Link to this definition"></a></dt>
+<dd><p>The Assign transformation assigns one or more variables or columns (specified as the input)
+to one or more other columns (specified by target and/or output as described below).</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>.  The name(s) of the columns
+from which attribute values are to be drawn
+(for assignment to the attributes of other columns).
+Must exactly match the length of the target argument.</p></li>
+<li><p><strong>Target</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>. the name(s) of the columns to which
+the attribute values taken from the input
+are to be assigned.
+Must exactly match the length of the input argument.
+Names are mapped 1-to-1 from input to target.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If no output argument is specified, the columns named in target are modified in-place.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – Optional. Names of the columns to output the result of the assignment to.
+Must exactly match the length of the input and target arguments.</p>
+</dd>
+</dl>
+<p>If no output array is provided, columns named in target are modified in-place.</p>
+<p>If an output array is provided:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>each column in the target array is first cloned,</p></li>
+<li><p>then the reassignment from the input to the target is applied;</p></li>
+<li><p>finally, the new (cloned and modified) column is written out to the column named in output.</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>InputAttr</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – Optional. Specifies which attribute of the input column to assign.
+Defaults to <code class="docutils literal notranslate"><span class="pre">value</span></code>.
+If a array is passed, its length must exactly match
+that of the input and target arrays.</p></li>
+<li><p><strong>TargetAttr</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – Optional. Specifies which attribute of the output column to assign to.
+Defaults to <code class="docutils literal notranslate"><span class="pre">value</span></code>.
+If a array is passed, its length must exactly match
+that of the input and target arrays.</p></li>
+</ul>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">InputAttr</span></code> and  <code class="docutils literal notranslate"><span class="pre">TargetAttr</span></code> must be one of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">onset</span></code>,</p></li>
+<li><p>or <code class="docutils literal notranslate"><span class="pre">duration</span></code>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This transformation is non-destructive with respect to the input column(s).
+In case where in-place assignment is desired (essentially, renaming a column),
+either use the rename transformation, or set output to the same value as the input.</p>
+</div>
+<p>To reassign the value property of a variable named <code class="docutils literal notranslate"><span class="pre">response_time</span></code>
+to the duration property of a <code class="docutils literal notranslate"><span class="pre">face</span></code> variable
+(as one might do in order to, e.g., model trial-by-trial reaction time differences
+for a given condition using a varying-epoch approach),
+and write it out as a new <code class="docutils literal notranslate"><span class="pre">face_modulated_by_RT</span></code> column.</p>
+</dd></dl>
+
+</section>
+<section id="concatenate">
+<h3>Concatenate<a class="headerlink" href="#concatenate" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Concatenate.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Concatenate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Concatenate.html" title="Link to this definition"></a></dt>
+<dd><p>Concatenate columns together.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array</span></code></span>) – <strong>mandatory</strong>. Column(s) to concatenate. Must all be of the same length.</p></li>
+<li><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – Optional. Name of the output column.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="copy">
+<h3>Copy<a class="headerlink" href="#copy" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Copy.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Copy.html" title="Link to this definition"></a></dt>
+<dd><p>Clones/copies each of the input columns to a new column with identical values
+and a different name. Useful as a basis for subsequent transformations that need
+to modify their input in-place.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>.  Column names to copy.</p></li>
+<li><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – Optional. Names to copy the input columns to.
+Must be same length as input, and columns are mapped one-to-one
+from the input array to the output array.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="delete">
+<h3>Delete<a class="headerlink" href="#delete" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Delete.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Delete.html" title="Link to this definition"></a></dt>
+<dd><p>Deletes column(s) from further analysis.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>. The name(s) of the columns(s) to delete.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Select</span></code> transformation provides the inverse function
+(selection of columns to keep for subsequent analysis).</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="dropna">
+<h3>DropNA<a class="headerlink" href="#dropna" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Drop_na.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Drop_na</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Drop_na.html" title="Link to this definition"></a></dt>
+<dd><p>Drops all rows with “n/a”.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>.  The name of the variable to operate on.</p></li>
+<li><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – Optional. The column names to write out to.
+By default, computation is done in-place
+meaning that input columnise overwritten).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="factor">
+<h3>Factor<a class="headerlink" href="#factor" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Factor.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Factor.html" title="Link to this definition"></a></dt>
+<dd><p>Converts a nominal/categorical variable with N unique levels
+to either N indicators (i.e., dummy-coding).</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>. The name(s) of the variable(s) to dummy-code.</p>
+</dd>
+</dl>
+<p>By default it is the first factor level when sorting in alphabetical order
+(e.g., if a condition has levels ‘dog’, ‘apple’, and ‘helsinki’,
+the default reference level will be ‘apple’).</p>
+<p>The name of the output columns for 2 input columns <code class="docutils literal notranslate"><span class="pre">gender</span></code> and <code class="docutils literal notranslate"><span class="pre">age</span></code>
+with 2 levels (<code class="docutils literal notranslate"><span class="pre">M</span></code>, <code class="docutils literal notranslate"><span class="pre">F</span></code>) and (<code class="docutils literal notranslate"><span class="pre">20</span></code>, <code class="docutils literal notranslate"><span class="pre">30</span></code>) respectivaly
+will of the shape:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gender_F_age_20</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gender_F_age_20</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gender_M_age_30</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gender_M_age_30</span></code></p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="filter">
+<h3>Filter<a class="headerlink" href="#filter" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Filter.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Filter.html" title="Link to this definition"></a></dt>
+<dd><p>Subsets rows using a logical expression.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>. The name(s) of the variable(s) to operate on.</p></li>
+<li><p><strong>Query</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – <strong>mandatory</strong>. logical expression used to filter</p></li>
+</ul>
+</dd>
+</dl>
+<p>Supports:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">~=</span></code> for numeric values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">~=</span></code> for char operation (case sensitive).
+Regular expressions are supported</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – Optional. The optional column names to write out to.</p>
+</dd>
+</dl>
+<p>By default, computation is done in-place (i.e., input columnise overwritten).
+If provided, the number of values must exactly match the number of input values,
+and the order will be mapped 1-to-1.</p>
+</dd></dl>
+
+</section>
+<section id="label-identical-rows">
+<h3>Label identical rows<a class="headerlink" href="#label-identical-rows" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Label_identical_rows.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Label_identical_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Label_identical_rows.html" title="Link to this definition"></a></dt>
+<dd><p>Creates an extra column to index consecutive identical rows in a column.
+The index restarts at 1 with every change of row content.
+This can for example be used to label consecutive events of the same trial_type in
+a block.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>. The name(s) of the variable(s) to operate on.</p></li>
+<li><p><strong>Cumulative</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – <strong>optional</strong>. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the labels are not reset to 0
+when encountering new row content.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The labels will be by default be put in a column called Input(i)_label</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="merge-identical-rows">
+<h3>Merge identical rows<a class="headerlink" href="#merge-identical-rows" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Merge_identical_rows.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Merge_identical_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Merge_identical_rows.html" title="Link to this definition"></a></dt>
+<dd><p>Merge consecutive identical rows.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>. The name(s) of the variable(s) to operate on.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Only works on data commit from event.tsv</p></li>
+<li><p>Content is sorted by onset time before merging</p></li>
+<li><p>If multiple variables are specified, they are merged in the order they are specified</p></li>
+<li><p>If a variable is not found, it is ignored</p></li>
+<li><p>If a variable is found, but is empty, it is ignored</p></li>
+<li><p>The content of the other columns corresponds to the last row being merged:
+this means that the content from other columns but the one specified in will be deleted
+except for the last one</p></li>
+</ul>
+</div>
+</dd></dl>
+
+</section>
+<section id="replace">
+<h3>Replace<a class="headerlink" href="#replace" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Replace.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Replace.html" title="Link to this definition"></a></dt>
+<dd><p>Replaces values in one or more input columns.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>. Name(s of column(s) to search and replace within.</p></li>
+<li><p><strong>Replace</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">objects</span></code></span>) – <strong>mandatory</strong>. The mapping old values (<code class="docutils literal notranslate"><span class="pre">&quot;key&quot;</span></code>) to new values.
+(<code class="docutils literal notranslate"><span class="pre">&quot;value&quot;</span></code>).
+<code class="docutils literal notranslate"><span class="pre">key</span></code> can be a regular expression.</p></li>
+<li><p><strong>Attribute</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array</span></code></span>) – Optional. The column attribute to apply the replace to.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Valid values include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;value&quot;</span></code> (the default),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;duration&quot;</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;onset&quot;</span></code>,</p></li>
+<li><p>and <code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code>.</p></li>
+</ul>
+<p>In the last case, all three attributes
+(<code class="docutils literal notranslate"><span class="pre">&quot;value&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;duration&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;onset&quot;</span></code>) will be scanned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – Optional. Optional names of columns to output.
+Must match length of input column(s) if provided,
+and columns will be mapped 1-to-1 in order.
+If no output values are provided,
+the replacement transformation is applied in-place
+to all the inputs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="select">
+<h3>Select<a class="headerlink" href="#select" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Select.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Select.html" title="Link to this definition"></a></dt>
+<dd><p>The select transformation specifies which columns to retain for subsequent analysis.</p>
+<p>Any columns that are not specified here will be dropped.</p>
+<p>The only exception is when dealing with data with <code class="docutils literal notranslate"><span class="pre">onset</span></code> and <code class="docutils literal notranslate"><span class="pre">duration</span></code>
+columns (from <code class="docutils literal notranslate"><span class="pre">*_events.tsv</span></code> files) in this case the onset and duration column
+are also automatically selected.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>. The names of all columns to keep.
+Any columns not in this array will be deleted and
+will not be available to any subsequent transformations
+or downstream analyses.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>one can think of select as the inverse the <code class="docutils literal notranslate"><span class="pre">Delete</span></code> transformation
+that removes all named columns from further analysis.</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="split">
+<h3>Split<a class="headerlink" href="#split" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Split.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Split.html" title="Link to this definition"></a></dt>
+<dd><p>Split a variable into N variables as defined by the levels of one or more other variables.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array</span></code></span>) – <strong>mandatory</strong>. The name of the variable(s) to operate on.</p></li>
+<li><p><strong>By</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array</span></code></span>) – Optional. Name(s) for variable(s) to split on.</p></li>
+</ul>
+</dd>
+</dl>
+<p>For example, for given a variable Condition
+that we wish to split on two categorical columns A and B,
+where a given row has values A=a and B=1,
+the generated name will be <code class="docutils literal notranslate"><span class="pre">Condition_BY_A_a_BY_B_1</span></code>.</p>
+</dd></dl>
+
+</section>
+</section>
+<section id="compute-operations">
+<h2>Compute operations<a class="headerlink" href="#compute-operations" title="Link to this heading"></a></h2>
+<p>Transformations that primarily involve numerical computation on variables.</p>
+<section id="constant">
+<h3>Constant<a class="headerlink" href="#constant" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Constant.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Constant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Constant.html" title="Link to this definition"></a></dt>
+<dd><p>Adds a new column with a constant value (numeric or char).</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>. Name of the newly generated column.</p></li>
+<li><p><strong>Value</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">float</span> <span class="pre">or</span> <span class="pre">char</span></code></span>) – Optional. The value of the constant, defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="mean">
+<h3>Mean<a class="headerlink" href="#mean" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Mean.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Mean.html" title="Link to this definition"></a></dt>
+<dd><p>Compute mean of a column.</p>
+<section id="json-example">
+<h4>JSON EXAMPLE<a class="headerlink" href="#json-example" title="Link to this heading"></a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"Name"</span><span class="p">:</span><span class="w">  </span><span class="s2">"Mean"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"Input"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reaction_time"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"OmitNan"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"Output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mean_RT"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">param Input<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mandatory</strong>. The name of the variable to operate on.</p>
+</dd>
+<dt class="field-even">type  Input<span class="colon">:</span></dt>
+<dd class="field-even"><p>char or array</p>
+</dd>
+<dt class="field-odd">param OmitNan<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional. If <code class="docutils literal notranslate"><span class="pre">false</span></code> any column with nan values will return a nan value.
+If <code class="docutils literal notranslate"><span class="pre">true</span></code> nan values are skipped. Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd>
+<dt class="field-even">type  OmitNan<span class="colon">:</span></dt>
+<dd class="field-even"><p>logical</p>
+</dd>
+<dt class="field-odd">param Output<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional. The optional column names to write out to.
+By default, computation is done in-place (i.e., input columnise overwritten).</p>
+</dd>
+<dt class="field-even">type  Output<span class="colon">:</span></dt>
+<dd class="field-even"><p>char or array</p>
+</dd>
+</dl>
+</section>
+<section id="code-example">
+<h4>CODE EXAMPLE<a class="headerlink" href="#code-example" title="Link to this heading"></a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">transformer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">'Name'</span><span class="p">,</span><span class="w"> </span><span class="s">'Mean'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                      </span><span class="s">'Input'</span><span class="p">,</span><span class="w"> </span><span class="s">'reaction_time'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                      </span><span class="s">'OmitNan'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                      </span><span class="s">'Ouput'</span><span class="p">,</span><span class="w"> </span><span class="s">'mean_RT'</span><span class="p">);</span>
+
+<span class="n">data</span><span class="p">.</span><span class="n">reaction_time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">TODO</span>
+
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">transformers</span><span class="p">(</span><span class="n">transformer</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="n">data</span><span class="p">.</span><span class="n">mean_RT</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">TODO</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">TODO</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+</section>
+<section id="product">
+<h3>Product<a class="headerlink" href="#product" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Product.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Product.html" title="Link to this definition"></a></dt>
+<dd><p>Computes the row-wise product of two or more columns.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array</span></code></span>) – <strong>mandatory</strong>. Names of two or more columns to compute the product of.</p></li>
+<li><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">string</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>. Name of the newly generated column.</p></li>
+<li><p><strong>OmitNan</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Optional. If <code class="docutils literal notranslate"><span class="pre">false</span></code> any column with nan values will return a nan value.
+If <code class="docutils literal notranslate"><span class="pre">true</span></code> nan values are skipped. Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="scale">
+<h3>Scale<a class="headerlink" href="#scale" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Scale.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Scale.html" title="Link to this definition"></a></dt>
+<dd><p>Scales the values of one or more columns.</p>
+<p>Semantics mimic scikit-learn, such that demeaning and
+rescaling are treated as independent arguments,
+with the default being to apply both
+(i.e., standardizing each value so that it has zero mean and unit SD).</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>.  Names of columns to standardize.</p></li>
+<li><p><strong>Demean</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Optional. If <code class="docutils literal notranslate"><span class="pre">true</span></code>, subtracts the mean from each input column
+(i.e., applies mean-centering).</p></li>
+<li><p><strong>Rescale</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Optional. If <code class="docutils literal notranslate"><span class="pre">true</span></code>, divides each column by its standard deviation.</p></li>
+<li><p><strong>ReplaceNa</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Optional. Whether/when to replace missing values with 0.
+If <code class="docutils literal notranslate"><span class="pre">&quot;off&quot;</span></code>, no replacement is performed.
+If <code class="docutils literal notranslate"><span class="pre">&quot;before&quot;</span></code>, missing values are replaced with 0 before scaling.
+If <code class="docutils literal notranslate"><span class="pre">&quot;after&quot;</span></code>, missing values are replaced with 0 after scaling.
+Defaults to <code class="docutils literal notranslate"><span class="pre">&quot;off&quot;</span></code></p></li>
+<li><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – Optional. Optional names of columns to output.
+Must match length of input column if provided,
+and columns will be mapped 1-to-1 in order.
+If no output values are provided,
+the scaling transformation is applied in-place to all the input.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="std">
+<h3>Std<a class="headerlink" href="#std" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Std.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Std.html" title="Link to this definition"></a></dt>
+<dd><p>Compute the sample standard deviation.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>. The name of the variable to operate on.</p></li>
+<li><p><strong>OmitNan</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Optional. If <code class="docutils literal notranslate"><span class="pre">false</span></code> any column with nan values will return a nan value.
+If <code class="docutils literal notranslate"><span class="pre">true</span></code> nan values are skipped. Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – Optional. The optional column names to write out to.
+By default, computation is done in-place (i.e., input columnise overwritten).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="sum">
+<h3>Sum<a class="headerlink" href="#sum" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Sum.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Sum.html" title="Link to this definition"></a></dt>
+<dd><p>Computes the (optionally weighted) row-wise sums of two or more columns.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array</span></code></span>) – <strong>mandatory</strong>. Names of two or more columns to sum.</p></li>
+<li><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>. Name of the newly generated column.</p></li>
+<li><p><strong>OmitNan</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Optional. If <code class="docutils literal notranslate"><span class="pre">false</span></code> any column with nan values will return a nan value.
+If <code class="docutils literal notranslate"><span class="pre">true</span></code> nan values are skipped. Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><strong>Weights</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array</span></code></span>) – Optional. Optional array of floats giving the weights of the columns.
+If provided, length of weights must equal
+to the number of values in input,
+and weights will be mapped 1-to-1 onto named columns.
+If no weights are provided,
+defaults to unit weights (i.e., simple sum).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="threshold">
+<h3>Threshold<a class="headerlink" href="#threshold" title="Link to this heading"></a></h3>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/+transformers_list/Threshold.m">
+<span class="sig-prename descclassname"><span class="pre">bids.transformers_list.</span></span><span class="sig-name descname"><span class="pre">Threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">transformer</span></em>, <em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.transformers_list.Threshold.html" title="Link to this definition"></a></dt>
+<dd><p>Thresholds input values at a specified cut-off and optionally binarizes the result.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – <strong>mandatory</strong>.  The name(s)of the column(s) to threshold/binarize.</p></li>
+<li><p><strong>Threshold</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">float</span></code></span>) – Optional. The cut-off to use for thresholding. Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><strong>Binarize</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Optional. If <code class="docutils literal notranslate"><span class="pre">true</span></code>, thresholded values will be binarized
+(i.e., all non-zero values will be set to 1).
+Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><strong>Above</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Optional. Specifies which values to retain with respect to the cut-off.
+If <code class="docutils literal notranslate"><span class="pre">true</span></code>, all value above the threshold will be kept;
+if <code class="docutils literal notranslate"><span class="pre">false</span></code>, all values below the threshold will be kept.
+Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p><strong>Signed</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Optional. Specifies whether to treat the threshold
+as signed (default) or unsigned.</p></li>
+</ul>
+</dd>
+</dl>
+<p>For example, when passing above=true and threshold=3,
+if signed=true, all and only values above +3 would be retained.
+If signed=false, all absolute values &gt; 3 would be retained
+(i.e.,values in  the range -3 &lt; X &lt; 3 would be set to 0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Output</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">array</span></code></span>) – Optional. Optional names of columns to output.
+Must match length of input column if provided,
+and columns will be mapped 1-to-1 in order.
+If no output values are provided,
+the threshold transformation is applied
+in-place to all the inputs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="stats_model.html" class="btn btn-neutral float-left" title="BIDS stats model handling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="schema.html" class="btn btn-neutral float-right" title="Using the BIDS schema" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, BIDS-MATLAB developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributing &mdash; bids-matlab v0.3.0
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19ed39ba"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/mat_urls.js?v=fdbe6872"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="Demos" href="demos.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            bids-matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="general_information.html">BIDS for MATLAB / Octave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layout_query.html">Indexing and querying a BIDS dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file.html">BIDS file handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats_model.html">BIDS stats model handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variable_transformations.html">Variable transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schema.html">Using the BIDS schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos.html">Demos</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#style-guide">Style guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#writing-in-markdown">Writing in markdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-code-style-guide-and-quality">MATLAB code style guide and quality</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-tests-on-the-code">Running tests on the code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-moxunit">Install MOxUnit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-test-data">Install the test data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-helper-functions-to-the-path">Add helper functions to the path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-tests">Run the tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-more-tests">Adding more tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#timing">Timing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-documentation">Building the documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-dependencies">Install the dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-the-documentation-locally">Build the documentation locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restructured-text-markup">reStructured text markup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#templates">“Templates”</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#how-the-decision-to-merge-a-pull-request-is-made">How the decision to merge a pull request is made?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recognizing-contributions">Recognizing contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developper_doc/index.html">Documentation for developers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">bids-matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Contributing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/contributing.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading"></a></h1>
+<p><strong>Welcome to the bids-matlab repository!</strong></p>
+<p>We’re so excited you’re here and want to contribute.</p>
+<p>We hope that these guidelines are designed to make it as easy as possible to get involved.
+If you have any questions that aren’t discussed below, please let us know
+by <a class="reference external" href="https://github.com/bids-standard/bids-matlab/issues/new">opening an issue</a>.</p>
+<p>If you are not familiar with Git and GitHub,
+check our <a class="reference external" href="https://bids-website.readthedocs.io/en/latest/collaboration/bids_github/CONTRIBUTING.html">generic contributing guidelines</a>.</p>
+<p>If you want to contribute to the BIDS matlab codebase,
+make sure you also read the instructions below.</p>
+<section id="style-guide">
+<h2>Style guide<a class="headerlink" href="#style-guide" title="Link to this heading"></a></h2>
+<section id="writing-in-markdown">
+<h3>Writing in markdown<a class="headerlink" href="#writing-in-markdown" title="Link to this heading"></a></h3>
+<p>For anything that is in markdown we have a soft rule that aims to enforce
+“hardline wrapping” to make sure that lines wrap around at a certain line
+length. The main reason is that it makes it easier for reviewers to detect the
+changes so in a whole paragraph.</p>
+<p>Some editors can automatically enforce hard-line wrapping with some linter like
+<code class="docutils literal notranslate"><span class="pre">Prettier</span></code> so that you are always only a shortcut away from a tidy document. See
+an example with visual-studio code
+<a class="reference external" href="https://glebbahmutov.com/blog/configure-prettier-in-vscode/#saving-without-formatting">here</a>.</p>
+</section>
+<section id="matlab-code-style-guide-and-quality">
+<h3>MATLAB code style guide and quality<a class="headerlink" href="#matlab-code-style-guide-and-quality" title="Link to this heading"></a></h3>
+<p>We use the <a class="reference external" href="https://github.com/florianschanda/miss_hit/">MISS_HIT linter</a> to
+automatically enforce / fix some code style issues and check for
+<a class="reference external" href="https://the-turing-way.netlify.app/reproducible-research/code-quality.html">code quality</a>.</p>
+<p>The linter is a Python package that can be installed with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<details><summary> <b>💻 Installing Python</b> </font> </summary><br>
+<p>If you do not have Python on your computer, we warmly recommend the install
+instruction from the
+<a class="reference external" href="http://handbook.datalad.org/en/latest/intro/installation.html">datalad handbook</a>.</p>
+</details>
+<p>The rules followed by MISS_HIT are in the
+<a class="reference external" href="https://github.com/bids-standard/bids-matlab/blob/main/miss_hit.cfg">MISS_HIT configuration file</a>.</p>
+<p>To check the code style of the whole repository, you can can simply type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mh_style<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Some styling issues can be automatically fixed by using the <code class="docutils literal notranslate"><span class="pre">--fix</span></code> flag. You
+might need to rerun this command several times if there are a lot of issues.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mh_style<span class="w"> </span>.<span class="w"> </span>--fix
+</pre></div>
+</div>
+<p>Code quality can be checked with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mh_metric<span class="w"> </span>.
+</pre></div>
+</div>
+<p>To see only the issues that “break” the code quality rules set in the
+configuration file, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mh_metric<span class="w"> </span>.<span class="w"> </span>--ci
+</pre></div>
+</div>
+<p>The code style and quality is also checked during the continuous integration.</p>
+<p>For more information about MISS_HIT see its
+<a class="reference external" href="https://florianschanda.github.io/miss_hit/">documentation</a>.</p>
+</section>
+</section>
+<section id="running-tests-on-the-code">
+<h2>Running tests on the code<a class="headerlink" href="#running-tests-on-the-code" title="Link to this heading"></a></h2>
+<p>We use a series of unit and integration tests to make sure the code behaves as
+expected and to also help in development.
+The unit and integration tests we have are in the [<code class="docutils literal notranslate"><span class="pre">tests</span></code> folder]’(./tests/)
+and should be run with <a class="reference external" href="https://moxunit.github.io/MOxUnit/">MOxUnit</a>.</p>
+<p>If you are not sure what unit and integration tests are, check the chapter about
+that in the
+<a class="reference external" href="https://the-turing-way.netlify.app/reproducible-research/testing.html">Turing way</a>.</p>
+<section id="install-moxunit">
+<h3>Install MOxUnit<a class="headerlink" href="#install-moxunit" title="Link to this heading"></a></h3>
+<p>You need to install
+<a class="reference external" href="https://github.com/MOxUnit/MOxUnit">MOxUnit for MATLAB and Octave</a> to run the
+tests.</p>
+<p>Note the install procedure will require you to have
+<a class="reference external" href="https://git-scm.com/downloads">git</a> installed on your computer.
+If you don’t,
+you can always download the MOxUnit code with this
+<a class="reference external" href="https://github.com/MOxUnit/MOxUnit/archive/master.zip">link</a>.</p>
+<p>Run the following from a terminal in the folder where you want to install MOxUnit.
+The <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> command will find MATLAB / Octave on your system and
+make sure it plays nice with MOxUnit.</p>
+<p>NOTE: only type in the terminal what is after the <code class="docutils literal notranslate"><span class="pre">$</span></code> sign:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the code for MOxUnit with git</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/MOxUnit/MOxUnit.git
+<span class="c1"># enter the newly created folder and set up MOxUnit</span>
+<span class="nb">cd</span><span class="w"> </span>MOxUnit
+make<span class="w"> </span>install
+</pre></div>
+</div>
+<p>If you want to check the code coverage on your computer, you can also install
+<a class="reference external" href="https://github.com/MOcov/MOcov">MOcov for matlab and octave</a>.
+Note that this is
+also part of the continuous integration of the bids-matlab, so you don’t need to
+do this.</p>
+</section>
+<section id="install-the-test-data">
+<h3>Install the test data<a class="headerlink" href="#install-the-test-data" title="Link to this heading"></a></h3>
+<p>To run the tests we used the examples data sets from the
+<a class="reference external" href="https://github.com/bids-standard/bids-examples">bids-examples repository</a>
+and also create some dummy datasets.</p>
+<p>This requires python to be installed as a python script is used
+to generate the dummy datasets.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>tests
+make<span class="w"> </span>data
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>tests
+pip<span class="w"> </span>install<span class="w"> </span>pandas
+python<span class="w"> </span>create_dummy_data_set.py
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/bids-standard/bids-examples.git<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+</section>
+<section id="add-helper-functions-to-the-path">
+<h3>Add helper functions to the path<a class="headerlink" href="#add-helper-functions-to-the-path" title="Link to this heading"></a></h3>
+<p>There are a some help functions you need
+to add to the MATLAB / Octave path to run the tests:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">addpath</span><span class="p">(</span><span class="nb">fullfile</span><span class="p">(</span><span class="s">'tests'</span><span class="p">,</span><span class="w"> </span><span class="s">'utils'</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="run-the-tests">
+<h3>Run the tests<a class="headerlink" href="#run-the-tests" title="Link to this heading"></a></h3>
+<p>From the root folder of the bids-matlab folder, you can run the test with one
+the following commands.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>moxunit_runtests<span class="w"> </span>tests
+
+<span class="c1"># Or if you want more feedback</span>
+moxunit_runtests<span class="w"> </span>tests<span class="w"> </span>-verbose
+</pre></div>
+</div>
+</section>
+<section id="adding-more-tests">
+<h3>Adding more tests<a class="headerlink" href="#adding-more-tests" title="Link to this heading"></a></h3>
+<p>You can use the following function template to write more tests.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>test_suite<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">test_functionToTest</span><span class="p">()</span>
+<span class="w">    </span><span class="c">% This top function is necessary for MOxUnit to run tests.</span>
+<span class="w">    </span><span class="c">% DO NOT CHANGE IT except to adapt the name of the function.</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="c">% assignment of 'localfunctions' is necessary in Matlab &gt;= 2016</span>
+<span class="w">        </span><span class="n">test_functions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">localfunctions</span><span class="p">();</span><span class="w"> </span><span class="c">%#ok&lt;*NASGU&gt;</span>
+<span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="c">% no problem; early Matlab versions can use initTestSuite fine</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">initTestSuite</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">test_function_to_test_basic</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c">%% set up</span>
+
+
+<span class="w">    </span><span class="c">%% data to test against</span>
+
+
+<span class="w">    </span><span class="c">%% test</span>
+<span class="w">    </span><span class="c">% assertTrue( );</span>
+<span class="w">    </span><span class="c">% assertFalse( );</span>
+<span class="w">    </span><span class="c">% assertEqual( );</span>
+
+<span class="k">end</span>
+
+
+<span class="k">function</span><span class="w"> </span><span class="nf">test_function_to_test_other_usecase</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c">%% set up</span>
+
+
+<span class="w">    </span><span class="c">%% data to test against</span>
+
+
+<span class="w">    </span><span class="c">%% test</span>
+<span class="w">    </span><span class="c">% assertTrue( );</span>
+<span class="w">    </span><span class="c">% assertFalse( );</span>
+<span class="w">    </span><span class="c">% assertEqual( );</span>
+
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+<section id="timing">
+<h3>Timing<a class="headerlink" href="#timing" title="Link to this heading"></a></h3>
+<p>If you need to load a dummy datasets check the <code class="docutils literal notranslate"><span class="pre">layout_timing</span></code> function as it as
+a list of all the bids-matlab datasets and how loing it takes (more or less) to
+run layout on each.</p>
+</section>
+</section>
+<section id="building-the-documentation">
+<h2>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Link to this heading"></a></h2>
+<p>The documentation is generated with the <code class="docutils literal notranslate"><span class="pre">Sphinx</span></code> python package
+and the help section of all the functions and classes
+is used to create the code documentation
+thanks to the <code class="docutils literal notranslate"><span class="pre">sphinxcontrib-matlabdomain</span></code> sphinx extension.</p>
+<section id="install-the-dependencies">
+<h3>Install the dependencies<a class="headerlink" href="#install-the-dependencies" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+<section id="build-the-documentation-locally">
+<h3>Build the documentation locally<a class="headerlink" href="#build-the-documentation-locally" title="Link to this heading"></a></h3>
+<p>From the <code class="docutils literal notranslate"><span class="pre">docs</span></code> directory run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>html
+</pre></div>
+</div>
+<p>or if you do not have make:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w"> </span><span class="nb">source</span><span class="w"> </span>build
+</pre></div>
+</div>
+<p>This will build an html version of the doc in the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder.</p>
+</section>
+<section id="restructured-text-markup">
+<h3>reStructured text markup<a class="headerlink" href="#restructured-text-markup" title="Link to this heading"></a></h3>
+<p>reStructured text mark up primers:</p>
+<ul class="simple">
+<li><p>on the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">sphinx site</a></p></li>
+<li><p>more
+<a class="reference external" href="https://pythonhosted.org/an_example_pypi_project/sphinx.html">python oriented</a></p></li>
+<li><p>typical doc strings templates</p>
+<ul>
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/example_google.html">google way</a></p></li>
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/example_numpy.html#example-numpy">numpy</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="templates">
+<h3>“Templates”<a class="headerlink" href="#templates" title="Link to this heading"></a></h3>
+<p>If you need to create a new page in the doc to automatically
+document your code, here is a ‘template’ to help you get started.</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">automodule</span><span class="p">::</span> +bids.folder_name .. &lt;-- This is necessary for auto-documenting the rest
+
+<span class="p">..</span> <span class="ow">autofunction</span><span class="p">::</span> function to document
+</pre></div>
+</div>
+<p>To get the filenames of all the functions in a folder to add them to a file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>-l<span class="w"> </span>+bids/*.m<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-c42-<span class="w"> </span><span class="p">|</span><span class="w"> </span>rev<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>rev<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>s/+bids/<span class="s2">".. autofunction::"</span>/g
+</pre></div>
+</div>
+<p>Increase the <code class="docutils literal notranslate"><span class="pre">42</span></code> to crop more characters at the beginning.</p>
+<p>Change the <code class="docutils literal notranslate"><span class="pre">3</span></code> to crop more characters at the end.</p>
+</section>
+</section>
+<section id="how-the-decision-to-merge-a-pull-request-is-made">
+<h2>How the decision to merge a pull request is made?<a class="headerlink" href="#how-the-decision-to-merge-a-pull-request-is-made" title="Link to this heading"></a></h2>
+<p>The decision-making rules are outlined in
+<a class="reference external" href="https://github.com/bids-standard/bids-matlab/blob/main/DECISION-MAKING.md">DECISION-MAKING.md</a>.</p>
+</section>
+<section id="recognizing-contributions">
+<h2>Recognizing contributions<a class="headerlink" href="#recognizing-contributions" title="Link to this heading"></a></h2>
+<p>bids-matlab follows the
+<a class="reference external" href="https://github.com/kentcdodds/all-contributors">all-contributors</a>
+specification, so we welcome and recognize all contributions from documentation
+to testing to code development. You can see a list of current contributors in
+the <a class="reference external" href="https://github.com/bids-standard/bids-matlab/blob/main/README.md">README</a>.</p>
+<p>Also make sure you add your information to the <a class="reference external" href="https://github.com/bids-standard/bids-matlab/blob/main/CITATION.cff">CITATION.cff file</a>.</p>
+<p>If you have made any type of contributions to bids-matlab, our team will add you
+as a contributor (or ask to be added if we forgot).</p>
+<p>You can also add yourself as a contributor as follows:</p>
+<p>Make sure you have Node.js and npm installed on your computer, then install the
+all-contributors-cli tool with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>all-contributors-cli
+</pre></div>
+</div>
+<p>Add yourself to <a class="reference external" href="https://github.com/bids-standard/bids-matlab/blob/main/.all-contributorsrc">.all-contributorsrc</a> and then run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>npx<span class="w"> </span>all-contributors<span class="w"> </span>generate
+</pre></div>
+</div>
+<p>Make a pull request with the changes to the .all-contributorsrc, README.md, and
+CITATION.cff files.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="demos.html" class="btn btn-neutral float-left" title="Demos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="changelog.html" class="btn btn-neutral float-right" title="Changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, BIDS-MATLAB developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

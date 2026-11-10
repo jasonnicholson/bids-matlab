@@ -1,0 +1,586 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIDS file handling &mdash; bids-matlab v0.3.0
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19ed39ba"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/mat_urls.js?v=fdbe6872"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="BIDS stats model handling" href="stats_model.html" />
+    <link rel="prev" title="Indexing and querying a BIDS dataset" href="layout_query.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            bids-matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="general_information.html">BIDS for MATLAB / Octave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layout_query.html">Indexing and querying a BIDS dataset</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BIDS file handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mat-+bids/File.m"><code class="docutils literal notranslate"><span class="pre">File</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stats_model.html">BIDS stats model handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variable_transformations.html">Variable transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schema.html">Using the BIDS schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developper_doc/index.html">Documentation for developers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">bids-matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">BIDS file handling</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/file.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bids-file-handling">
+<h1>BIDS file handling<a class="headerlink" href="#bids-file-handling" title="Link to this heading"></a></h1>
+<dl class="mat folder">
+<dt class="sig sig-object mat" id="mat-+bids/">
+<span class="property"><span class="pre">namespace</span> </span><span class="sig-name descname"><span class="pre">bids</span></span><a class="headerlink" href="mat/name/bids.html" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="mat-+bids/File.m">
+<span class="property"><span class="pre">class</span> </span><span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">File</span></span><a class="headerlink" href="mat/name/bids.File.html" title="Link to this definition"></a></dt>
+<dd><p>Class to deal with BIDS filenames</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bf</span> <span class="o">=</span> <span class="n">bids</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="o">...</span>
+                 <span class="s1">'use_schema'</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="o">...</span>
+                 <span class="s1">'tolerant'</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span>
+                 <span class="s1">'verbose'</span><span class="p">,</span> <span class="n">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">filename</span> <span class="pre">or</span> <span class="pre">structure</span></code></span>) – path to the file or a structure with the file information</p></li>
+<li><p><strong>use_schema</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – will apply the BIDS schema when parsing or creating filenames</p></li>
+<li><p><strong>tolerant</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – turns errors into warning when set to <code class="docutils literal notranslate"><span class="pre">true</span></code></p></li>
+<li><p><strong>verbose</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – silences warnings</p></li>
+</ul>
+</dd>
+</dl>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>Initialize with a filename.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="nb">pwd</span><span class="p">,</span><span class="w"> </span><span class="s">'sub-01_ses-02_T1w.nii'</span><span class="p">);</span>
+<span class="n">bf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">File</span><span class="p">(</span><span class="nb">input</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Initialize with a structure</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">'ext'</span><span class="p">,</span><span class="w"> </span><span class="s">'.nii'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">               </span><span class="s">'suffix'</span><span class="p">,</span><span class="w"> </span><span class="s">'T1w'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">               </span><span class="s">'entities'</span><span class="p">,</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">'sub'</span><span class="p">,</span><span class="w"> </span><span class="s">'01'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                                  </span><span class="s">'ses'</span><span class="p">,</span><span class="w"> </span><span class="s">'02'</span><span class="p">));</span>
+<span class="n">bf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">File</span><span class="p">(</span><span class="nb">input</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Remove prefixes and add a <code class="docutils literal notranslate"><span class="pre">desc-preproc</span></code> entity-label pair.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'wuasub-01_ses-test_task-faceRecognition_run-02_bold.nii'</span><span class="p">;</span>
+<span class="n">bf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">File</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span><span class="w"> </span><span class="s">'use_schema'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="n">bf</span><span class="p">.</span><span class="n">prefix</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">''</span><span class="p">;</span>
+<span class="n">bf</span><span class="p">.</span><span class="n">entities</span><span class="p">.</span><span class="n">desc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'preproc'</span><span class="p">;</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use the BIDS schema to get entities in the right order.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span><span class="p">.</span><span class="n">suffix</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'bold'</span><span class="p">;</span>
+<span class="nb">input</span><span class="p">.</span><span class="n">ext</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'.nii'</span><span class="p">;</span>
+<span class="nb">input</span><span class="p">.</span><span class="n">entities</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">'sub'</span><span class="p">,</span><span class="w"> </span><span class="s">'01'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'acq'</span><span class="p">,</span><span class="w"> </span><span class="s">'1pt5'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'run'</span><span class="p">,</span><span class="w"> </span><span class="s">'02'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'task'</span><span class="p">,</span><span class="w"> </span><span class="s">'face recognition'</span><span class="p">);</span>
+
+<span class="n">bf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">File</span><span class="p">(</span><span class="n">name_spec</span><span class="p">,</span><span class="w"> </span><span class="s">'use_schema'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Load metadata (supporting inheritance).</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">File</span><span class="p">(</span><span class="s">'tests/data/synthetic/sub-01/anat/sub-01_T1w.nii.gz'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Access metadata</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bf</span><span class="p">.</span><span class="n">metadata</span><span class="p">()</span>
+
+<span class="w">  </span><span class="nb">struct</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">fields</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Manufacturer</span><span class="p">:</span><span class="w"> </span><span class="s">'Siemens'</span>
+<span class="w">    </span><span class="n">FlipAngle</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span>
+</pre></div>
+</div>
+<p>Modify metadata</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Adding new value</span>
+
+<span class="n">bf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bf</span><span class="p">.</span><span class="n">metadata_add</span><span class="p">(</span><span class="s">'NewField'</span><span class="p">,</span><span class="w"> </span><span class="s">'new value'</span><span class="p">);</span>
+<span class="n">bf</span><span class="p">.</span><span class="n">metadata</span><span class="p">()</span>
+
+<span class="w">  </span><span class="nb">struct</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">fields</span><span class="p">:</span>
+<span class="w">    </span><span class="n">manufacturer</span><span class="p">:</span><span class="w"> </span><span class="s">'siemens'</span>
+<span class="w">    </span><span class="n">flipangle</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">    </span><span class="n">NewField</span><span class="p">:</span><span class="w"> </span><span class="s">'new value'</span>
+
+<span class="c">% Appending to existing value</span>
+
+<span class="n">bf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bf</span><span class="p">.</span><span class="n">metadata_append</span><span class="p">(</span><span class="s">'NewField'</span><span class="p">,</span><span class="w"> </span><span class="s">'new value 1'</span><span class="p">);</span>
+<span class="n">bf</span><span class="p">.</span><span class="n">metadata</span><span class="p">()</span>
+
+<span class="w">  </span><span class="nb">struct</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">fields</span><span class="p">:</span>
+<span class="w">    </span><span class="n">manufacturer</span><span class="p">:</span><span class="w"> </span><span class="s">'siemens'</span>
+<span class="w">    </span><span class="n">flipangle</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">    </span><span class="n">NewField</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s">'new value'</span><span class="p">;</span><span class="w"> </span><span class="s">'new value 1'</span><span class="p">}</span>
+
+<span class="c">% Removing value</span>
+
+<span class="n">bf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bf</span><span class="p">.</span><span class="n">metadata_remove</span><span class="p">(</span><span class="s">'NewField'</span><span class="p">);</span>
+<span class="n">bf</span><span class="p">.</span><span class="n">metadata</span><span class="p">()</span>
+
+<span class="w">  </span><span class="nb">struct</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">fields</span><span class="p">:</span>
+<span class="w">    </span><span class="n">manufacturer</span><span class="p">:</span><span class="w"> </span><span class="s">'siemens'</span>
+<span class="w">    </span><span class="n">flipangle</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span>
+</pre></div>
+</div>
+<p>Modify several fields of metadata</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bf</span><span class="p">.</span><span class="n">metadata_update</span><span class="p">(</span><span class="s">'Description'</span><span class="p">,</span><span class="w"> </span><span class="s">'source file'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                      </span><span class="s">'NewField'</span><span class="p">,</span><span class="w"> </span><span class="s">'new value'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                      </span><span class="s">'manufacturer'</span><span class="p">,</span><span class="w"> </span><span class="p">[]);</span>
+<span class="n">bf</span><span class="p">.</span><span class="n">metadata</span><span class="p">()</span>
+
+<span class="w">  </span><span class="nb">struct</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">fields</span><span class="p">:</span>
+<span class="w">    </span><span class="n">flipangle</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">    </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="s">'source file'</span>
+<span class="w">    </span><span class="n">NewField</span><span class="p">:</span><span class="w"> </span><span class="s">'new value'</span>
+</pre></div>
+</div>
+<p>Export metadata as json:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bf</span><span class="p">.</span><span class="n">metadata_write</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.prefix">
+<span class="sig-name descname"><span class="pre">prefix</span></span><span class="property"> <span class="pre">=</span> <span class="pre">''</span></span><a class="headerlink" href="mat/name/bids.File.prefix.html" title="Link to this definition"></a></dt>
+<dd><p>bids prefix</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.extension">
+<span class="sig-name descname"><span class="pre">extension</span></span><span class="property"> <span class="pre">=</span> <span class="pre">''</span></span><a class="headerlink" href="mat/name/bids.File.extension.html" title="Link to this definition"></a></dt>
+<dd><p>file extension</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><span class="property"> <span class="pre">=</span> <span class="pre">''</span></span><a class="headerlink" href="mat/name/bids.File.suffix.html" title="Link to this definition"></a></dt>
+<dd><p>file suffix</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.entities">
+<span class="sig-name descname"><span class="pre">entities</span></span><span class="property"> <span class="pre">=</span> <span class="pre">struct([])</span></span><a class="headerlink" href="mat/name/bids.File.entities.html" title="Link to this definition"></a></dt>
+<dd><p>list of entities</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.modality">
+<span class="sig-name descname"><span class="pre">modality</span></span><span class="property"> <span class="pre">=</span> <span class="pre">''</span></span><a class="headerlink" href="mat/name/bids.File.modality.html" title="Link to this definition"></a></dt>
+<dd><p>name of file modality</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.path">
+<span class="sig-name descname"><span class="pre">path</span></span><span class="property"> <span class="pre">=</span> <span class="pre">''</span></span><a class="headerlink" href="mat/name/bids.File.path.html" title="Link to this definition"></a></dt>
+<dd><p>absolute path</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.bids_path">
+<span class="sig-name descname"><span class="pre">bids_path</span></span><span class="property"> <span class="pre">=</span> <span class="pre">''</span></span><a class="headerlink" href="mat/name/bids.File.bids_path.html" title="Link to this definition"></a></dt>
+<dd><p>path within dataset</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><span class="property"> <span class="pre">=</span> <span class="pre">''</span></span><a class="headerlink" href="mat/name/bids.File.filename.html" title="Link to this definition"></a></dt>
+<dd><p>bidsified name</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.json_filename">
+<span class="sig-name descname"><span class="pre">json_filename</span></span><span class="property"> <span class="pre">=</span> <span class="pre">''</span></span><a class="headerlink" href="mat/name/bids.File.json_filename.html" title="Link to this definition"></a></dt>
+<dd><p>bidsified name for json file</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.metadata_files">
+<span class="sig-name descname"><span class="pre">metadata_files</span></span><span class="property"> <span class="pre">=</span> <span class="pre">{}</span></span><a class="headerlink" href="mat/name/bids.File.metadata_files.html" title="Link to this definition"></a></dt>
+<dd><p>list of metadata files related</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="property"> <span class="pre">=</span> <span class="pre">[]</span></span><a class="headerlink" href="mat/name/bids.File.metadata.html" title="Link to this definition"></a></dt>
+<dd><p>list of metadata for this file</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.entity_required">
+<span class="sig-name descname"><span class="pre">entity_required</span></span><span class="property"> <span class="pre">=</span> <span class="pre">{}</span></span><a class="headerlink" href="mat/name/bids.File.entity_required.html" title="Link to this definition"></a></dt>
+<dd><p>Required entities</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.entity_order">
+<span class="sig-name descname"><span class="pre">entity_order</span></span><span class="property"> <span class="pre">=</span> <span class="pre">{}</span></span><a class="headerlink" href="mat/name/bids.File.entity_order.html" title="Link to this definition"></a></dt>
+<dd><p>Expected order of entities</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.schema">
+<span class="sig-name descname"><span class="pre">schema</span></span><span class="property"> <span class="pre">=</span> <span class="pre">[]</span></span><a class="headerlink" href="mat/name/bids.File.schema.html" title="Link to this definition"></a></dt>
+<dd><p>BIDS schema used</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.update.html" title="Link to this definition"></a></dt>
+<dd><p>executed automatically before getting a value</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.reorder_entities">
+<span class="sig-name descname"><span class="pre">reorder_entities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">entity_order</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.reorder_entities.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">reorder_entities</span><span class="p">(</span><span class="n">entity_order</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity_order</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell</span> <span class="pre">of</span> <span class="pre">char</span></code></span>) – Optional. The order of the entities.</p>
+</dd>
+</dl>
+<p>If the no entity order is provided, it will try to rely on the schema to
+find an appropriate order</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% filename with ses entity in the wrong position</span>
+<span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'wuasub-01_task-faceRecognition_ses-test_run-02_bold.nii'</span><span class="p">;</span>
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">File</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="s">'use_schema'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">reorder_entities</span><span class="p">({</span><span class="s">'sub'</span><span class="p">,</span><span class="w"> </span><span class="s">'ses'</span><span class="p">});</span>
+
+<span class="c">% use the schema to do the reordering</span>
+<span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'wuasub-01_task-faceRecognition_ses-test_run-02_bold.nii'</span><span class="p">;</span>
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">File</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="s">'use_schema'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">use_schema</span><span class="p">();</span>
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">reorder_entities</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.rename">
+<span class="sig-name descname"><span class="pre">rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.rename.html" title="Link to this definition"></a></dt>
+<dd><p>Renames a file according following some specification</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">'spec'</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="s1">'dry_run'</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="s1">'verbose'</span><span class="p">,</span> <span class="p">[],</span> <span class="s1">'force'</span><span class="p">,</span> <span class="n">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spec</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">structure</span></code></span>) – structure specifying what entities, suffix, extension… to apply
+If one of the entities in the <code class="docutils literal notranslate"><span class="pre">spec</span></code> contains a <cite>‘.’</cite>
+it will be replaced by <cite>pt</cite>.</p></li>
+<li><p><strong>dry_run</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – If <code class="docutils literal notranslate"><span class="pre">true</span></code> no file is actually renamed.
+<code class="docutils literal notranslate"><span class="pre">true</span></code> is the default to avoid renaming files by mistake.</p></li>
+<li><p><strong>verbose</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – displays <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">--&gt;</span> <span class="pre">output</span></code></p></li>
+<li><p><strong>force</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Overwrites existing file.</p></li>
+</ul>
+</dd>
+</dl>
+<section id="id1">
+<h3>Example<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%% rename an SPM preprocessed file</span>
+
+<span class="c">% expected_name = fullfile(pwd, ...</span>
+<span class="c">%                         'sub-01', ...</span>
+<span class="c">%                         'sub-01_task-faceRep_space-individual_desc-preproc_bold.nii');</span>
+
+<span class="n">input_filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'uasub-01_task-faceRep_bold.nii'</span><span class="p">;</span>
+
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">File</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span><span class="w"> </span><span class="s">'use_schema'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+
+<span class="n">spec</span><span class="p">.</span><span class="n">prefix</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">''</span><span class="p">;</span><span class="w"> </span><span class="c">% remove prefix</span>
+<span class="n">spec</span><span class="p">.</span><span class="n">entities</span><span class="p">.</span><span class="n">desc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'preproc'</span><span class="p">;</span><span class="w"> </span><span class="c">% add description entity</span>
+<span class="n">spec</span><span class="p">.</span><span class="n">entity_order</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="s">'sub'</span><span class="p">,</span><span class="w"> </span><span class="s">'task'</span><span class="p">,</span><span class="w"> </span><span class="s">'desc'</span><span class="p">};</span>
+
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="s">'spec'</span><span class="p">,</span><span class="w"> </span><span class="n">spec</span><span class="p">,</span><span class="w"> </span><span class="s">'dry_run'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="s">'verbose'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+
+<span class="c">%% Get a specific file from a dataset to rename</span>
+
+<span class="n">BIDS</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">layout</span><span class="p">(</span><span class="n">path_to_dataset</span><span class="p">)</span>
+
+<span class="c">% construct a filter to get only the file we want/</span>
+<span class="n">subject</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'001'</span><span class="p">;</span>
+<span class="nb">run</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'001'</span><span class="p">;</span>
+<span class="n">suffix</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'bold'</span><span class="p">;</span>
+<span class="n">task</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'faceRep'</span><span class="p">;</span>
+<span class="nb">filter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">'sub'</span><span class="p">,</span><span class="w"> </span><span class="n">subject</span><span class="p">,</span><span class="w"> </span><span class="s">'task'</span><span class="p">,</span><span class="w"> </span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="s">'run'</span><span class="p">,</span><span class="w"> </span><span class="nb">run</span><span class="p">,</span><span class="w"> </span><span class="s">'suffix'</span><span class="p">,</span><span class="w"> </span><span class="n">suffix</span><span class="p">);</span>
+
+<span class="n">file_to_rename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span><span class="w"> </span><span class="s">'data'</span><span class="p">,</span><span class="w"> </span><span class="nb">filter</span><span class="p">);</span>
+
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">File</span><span class="p">(</span><span class="n">file_to_rename</span><span class="p">,</span><span class="w"> </span><span class="s">'use_schema'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+
+<span class="c">% specification to remove run entity</span>
+<span class="n">spec</span><span class="p">.</span><span class="n">entities</span><span class="p">.</span><span class="n">run</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">''</span><span class="p">;</span>
+
+<span class="c">% first run with dry_run = true to make sure we will get the expected output</span>
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="s">'spec'</span><span class="p">,</span><span class="w"> </span><span class="n">spec</span><span class="p">,</span><span class="w"> </span><span class="s">'dry_run'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="s">'verbose'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+
+<span class="c">% rename the file by setting dry_run to false</span>
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="s">'spec'</span><span class="p">,</span><span class="w"> </span><span class="n">spec</span><span class="p">,</span><span class="w"> </span><span class="s">'dry_run'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="s">'verbose'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.normalize_entities">
+<span class="sig-name descname"><span class="pre">normalize_entities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">~</span></em>, <em class="sig-param"><span class="pre">entities</span></em>, <em class="sig-param"><span class="pre">replace</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.normalize_entities.html" title="Link to this definition"></a></dt>
+<dd><p>Clean up entities</p>
+<p>Replaces “.” in entity label with “pt”.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entities</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">normalize_entities</span><span class="p">(</span><span class="n">entities</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.use_schema">
+<span class="sig-name descname"><span class="pre">use_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.use_schema.html" title="Link to this definition"></a></dt>
+<dd><p>Loads BIDS schema into instance and tries to update properties:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">file.modality</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file.required_entity</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file.entity_order</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file.relative_pth</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">use_schema</span><span class="p">();</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.validate_entities">
+<span class="sig-name descname"><span class="pre">validate_entities</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.validate_entities.html" title="Link to this definition"></a></dt>
+<dd><p>use entity_order got from schema as a proxy for allowed entity keys</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">validate_entities</span><span class="p">();</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.get_required_entities">
+<span class="sig-name descname"><span class="pre">get_required_entities</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.get_required_entities.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">file</span><span class="p">,</span> <span class="n">required_entities</span><span class="p">]</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">get_required_entities</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.get_modality_from_schema">
+<span class="sig-name descname"><span class="pre">get_modality_from_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.get_modality_from_schema.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">file</span><span class="p">,</span> <span class="n">modality</span><span class="p">]</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">get_modality_from_schema</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.get_entity_order_from_schema">
+<span class="sig-name descname"><span class="pre">get_entity_order_from_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.get_entity_order_from_schema.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">file</span><span class="p">,</span> <span class="n">entity_order</span><span class="p">]</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">get_entity_order_from_schema</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.check_required_entities">
+<span class="sig-name descname"><span class="pre">check_required_entities</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.check_required_entities.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">check_required_entities</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.metadata_update">
+<span class="sig-name descname"><span class="pre">metadata_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.metadata_update.html" title="Link to this definition"></a></dt>
+<dd><p>Update stored metadata with new values passed in varargin,
+which can be either a structure, or pairs of key-values.</p>
+<dl class="simple">
+<dt>See also</dt><dd><p>bids.util.update_struct</p>
+</dd>
+</dl>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">metadata_update</span><span class="p">(</span><span class="n">key1</span><span class="p">,</span> <span class="n">value1</span><span class="p">,</span> <span class="n">key2</span><span class="p">,</span> <span class="n">value2</span><span class="p">);</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">metadata_update</span><span class="p">(</span><span class="n">struct</span><span class="p">(</span><span class="n">key1</span><span class="p">,</span> <span class="n">value1</span><span class="p">,</span> <span class="o">...</span>
+                      <span class="n">key2</span><span class="p">,</span> <span class="n">value2</span><span class="p">));</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.metadata_add">
+<span class="sig-name descname"><span class="pre">metadata_add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">field</span></em>, <em class="sig-param"><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.metadata_add.html" title="Link to this definition"></a></dt>
+<dd><p>Add a new field (or replace existing) to the metadata structure</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.metadata_append">
+<span class="sig-name descname"><span class="pre">metadata_append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">field</span></em>, <em class="sig-param"><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.metadata_append.html" title="Link to this definition"></a></dt>
+<dd><p>Append new value to a metadata.(field)
+If metadata.(field) is a chararray, it will be first
+transformed into cellarray.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.metadata_remove">
+<span class="sig-name descname"><span class="pre">metadata_remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">field</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.metadata_remove.html" title="Link to this definition"></a></dt>
+<dd><p>Removes field from metadata</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.metadata_write">
+<span class="sig-name descname"><span class="pre">metadata_write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.metadata_write.html" title="Link to this definition"></a></dt>
+<dd><p>Export current content of metadata to sidecar json
+with same name as current file.</p>
+<p>Metadata fields can be modified with new values passed in varargin,
+which can be either a structure, or pairs of key-values.
+These modifications do not affect current File object,
+and only exported into file.
+Use bids.File.metadata_update to update current metadata.
+Returns full path to the exported sidecar json file.</p>
+<dl class="simple">
+<dt>See also</dt><dd><p>bids.util.update_struct</p>
+</dd>
+</dl>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">metadata_write</span><span class="p">(</span><span class="n">key1</span><span class="p">,</span> <span class="n">value1</span><span class="p">,</span> <span class="n">key2</span><span class="p">,</span> <span class="n">value2</span><span class="p">);</span>
+<span class="n">f</span><span class="o">.</span><span class="n">metadata_write</span><span class="p">(</span><span class="n">struct</span><span class="p">(</span><span class="n">key1</span><span class="p">,</span> <span class="n">value1</span><span class="p">,</span> <span class="o">...</span>
+                        <span class="n">key2</span><span class="p">,</span> <span class="n">value2</span><span class="p">));</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/File.m.get_modality">
+<span class="sig-name descname"><span class="pre">get_modality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">entities</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.File.get_modality.html" title="Link to this definition"></a></dt>
+<dd><p>Retrieves modality out of the path</p>
+<p>Only works if ses and sub entities match those found in the path</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</section>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="layout_query.html" class="btn btn-neutral float-left" title="Indexing and querying a BIDS dataset" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stats_model.html" class="btn btn-neutral float-right" title="BIDS stats model handling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, BIDS-MATLAB developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

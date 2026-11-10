@@ -1,0 +1,478 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Function description &mdash; bids-matlab v0.3.0
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=19ed39ba"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/mat_urls.js?v=fdbe6872"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utility functions" href="utility_functions.html" />
+    <link rel="prev" title="API" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bids-matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../general_information.html">BIDS for MATLAB / Octave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout_query.html">Indexing and querying a BIDS dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../file.html">BIDS file handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stats_model.html">BIDS stats model handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../variable_transformations.html">Variable transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../schema.html">Using the BIDS schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Function description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mat-+bids/Description.m"><code class="docutils literal notranslate"><span class="pre">Description</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utility_functions.html">Utility functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demos.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developper_doc/index.html">Documentation for developers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bids-matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API</a></li>
+      <li class="breadcrumb-item active">Function description</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/function_description.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="function-description">
+<h1>Function description<a class="headerlink" href="#function-description" title="Link to this heading"></a></h1>
+<dl class="mat folder">
+<dt class="sig sig-object mat" id="mat-+bids/">
+<span class="property"><span class="pre">namespace</span> </span><span class="sig-name descname"><span class="pre">bids</span></span><a class="headerlink" href="../mat/name/bids.html" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/derivatives_json.m">
+<span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">derivatives_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="../mat/name/bids.derivatives_json.html" title="Link to this definition"></a></dt>
+<dd><p>Creates dummy content for a given BIDS derivative file.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">json</span> <span class="o">=</span> <span class="n">derivatives_json</span><span class="p">(</span><span class="n">derivative_filename</span><span class="p">,</span> <span class="s1">'force'</span><span class="p">,</span> <span class="n">false</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>derivative_filename</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>)</p></li>
+<li><p><strong>force</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – when <cite>true</cite> it will force the creation of a json content even
+when the filename contains no BIDS derivatives entity.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/init.m">
+<span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="../mat/name/bids.init.html" title="Link to this definition"></a></dt>
+<dd><p>Initialize dataset with README, description, folder structure…</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bids</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">pth</span><span class="p">,</span> <span class="o">...</span>
+          <span class="s1">'folders'</span><span class="p">,</span> <span class="n">folders</span><span class="p">,</span> <span class="p">,</span><span class="o">...</span>
+          <span class="s1">'is_derivative'</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span><span class="o">...</span>
+          <span class="s1">'is_datalad_ds'</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="o">...</span>
+          <span class="s1">'tolerant'</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="o">...</span>
+          <span class="s1">'verbose'</span><span class="p">,</span> <span class="n">false</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pth</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – directory where to create the dataset</p></li>
+<li><p><strong>folders</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">structure</span></code></span>) – define the folder structure to create.
+<code class="docutils literal notranslate"><span class="pre">folders.subjects</span></code>
+<code class="docutils literal notranslate"><span class="pre">folders.sessions</span></code>
+<code class="docutils literal notranslate"><span class="pre">folders.modalities</span></code></p></li>
+<li><p><strong>is_derivative</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>)</p></li>
+<li><p><strong>is_datalad_ds</strong></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="mat-+bids/Description.m">
+<span class="property"><span class="pre">class</span> </span><span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">Description</span></span><a class="headerlink" href="../mat/name/bids.Description.html" title="Link to this definition"></a></dt>
+<dd><p>Class to deal with dataset_description files.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ds_desc</span> <span class="o">=</span> <span class="n">bids</span><span class="o">.</span><span class="n">Description</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">BIDS</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pipeline</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – pipeline name</p></li>
+<li><p><strong>BIDS</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">structure</span> <span class="pre">or</span> <span class="pre">char</span></code></span>) – output from BIDS layout to identify the source dataset
+used when creating a derivatives dataset
+Can also be the path to a dataset_descriptin.json file</p></li>
+</ul>
+</dd>
+</dl>
+<div class="members docutils container">
+<dl>
+<dt>Constructor Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Description.m.Description">
+<span class="sig-name descname"><span class="pre">Description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="../mat/name/bids.Description.Description.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ds_desc</span> <span class="o">=</span> <span class="n">bids</span><span class="o">.</span><span class="n">Description</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">BIDS</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Description.m.content">
+<span class="sig-name descname"><span class="pre">content</span></span><a class="headerlink" href="../mat/name/bids.Description.content.html" title="Link to this definition"></a></dt>
+<dd><p>dataset description content</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Description.m.is_derivative">
+<span class="sig-name descname"><span class="pre">is_derivative</span></span><span class="property"> <span class="pre">=</span> <span class="pre">false</span></span><a class="headerlink" href="../mat/name/bids.Description.is_derivative.html" title="Link to this definition"></a></dt>
+<dd><p>logical</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Description.m.pipeline">
+<span class="sig-name descname"><span class="pre">pipeline</span></span><span class="property"> <span class="pre">=</span> <span class="pre">''</span></span><a class="headerlink" href="../mat/name/bids.Description.pipeline.html" title="Link to this definition"></a></dt>
+<dd><p>name of the pipeline used to generate this derivative dataset</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Description.m.set_derivative">
+<span class="sig-name descname"><span class="pre">set_derivative</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="../mat/name/bids.Description.set_derivative.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ds_desc</span> <span class="o">=</span> <span class="n">ds_desc</span><span class="o">.</span><span class="n">set_derivative</span><span class="p">();</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Description.m.set_field">
+<span class="sig-name descname"><span class="pre">set_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="../mat/name/bids.Description.set_field.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ds_desc</span> <span class="o">=</span> <span class="n">ds_desc</span><span class="o">.</span><span class="n">set_field</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+<span class="n">ds_desc</span> <span class="o">=</span> <span class="n">ds_desc</span><span class="o">.</span><span class="n">set_field</span><span class="p">(</span><span class="n">struct</span><span class="p">(</span><span class="n">key1</span><span class="p">,</span> <span class="n">value1</span><span class="p">,</span> <span class="o">...</span>
+                                   <span class="n">key2</span><span class="p">,</span> <span class="n">value2</span><span class="p">));</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Description.m.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">key</span></em>, <em class="sig-param"><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="../mat/name/bids.Description.append.html" title="Link to this definition"></a></dt>
+<dd><p>Appends an item to the dataset description content.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ds_desc</span> <span class="o">=</span> <span class="n">ds_desc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Description.m.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="../mat/name/bids.Description.write.html" title="Link to this definition"></a></dt>
+<dd><p>Writes json file of the dataset description.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ds_desc</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">folder</span> <span class="o">=</span> <span class="n">pwd</span><span class="p">]);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/copy_to_derivative.m">
+<span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">copy_to_derivative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="../mat/name/bids.copy_to_derivative.html" title="Link to this definition"></a></dt>
+<dd><p>Copy selected data from BIDS layout to given derivatives folder.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bids</span><span class="o">.</span><span class="n">copy_to_derivative</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span> <span class="o">...</span>
+                        <span class="s1">'pipeline_name'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="o">...</span>
+                        <span class="s1">'out_path'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="o">...</span>
+                        <span class="s1">'filters'</span><span class="p">,</span> <span class="n">struct</span><span class="p">(),</span> <span class="o">...</span>
+                        <span class="s1">'unzip'</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="o">...</span>
+                        <span class="s1">'force'</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="o">...</span>
+                        <span class="s1">'skip_dep'</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="o">...</span>
+                        <span class="s1">'use_schema, true, ...</span>
+                        <span class="s1">'verbose'</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="o">...</span>
+                        <span class="s1">'tolerant'</span><span class="p">,</span> <span class="n">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>BIDS</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">structure</span> <span class="pre">or</span> <span class="pre">char</span></code></span>) – BIDS directory name or BIDS structure (from bids.layout)</p></li>
+<li><p><strong>pipeline_name</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – name of pipeline to use</p></li>
+<li><p><strong>out_path</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – path to directory containing the derivatives</p></li>
+<li><p><strong>filter</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">structure</span> <span class="pre">or</span> <span class="pre">cell</span></code></span>) – list of filters to choose what files to copy (see bids.query)</p></li>
+<li><p><strong>unzip</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – If <code class="docutils literal notranslate"><span class="pre">true</span></code> then all <code class="docutils literal notranslate"><span class="pre">.gz</span></code> files will be unzipped
+after being copied.
+For MacOS and Unix system, this will require a
+version of gunzip &gt;= 1.6.</p></li>
+<li><p><strong>force</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – If set to <code class="docutils literal notranslate"><span class="pre">false</span></code> it will not overwrite any file already
+present in the destination.</p></li>
+<li><p><strong>skip_dep</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – If set to <code class="docutils literal notranslate"><span class="pre">false</span></code> it will copy all the
+dependencies of each file.</p></li>
+<li><p><strong>tolerant</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">boolean</span></code></span>) – Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>. Set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to turn errors into warnings.</p></li>
+<li><p><strong>use_schema</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – If set to <code class="docutils literal notranslate"><span class="pre">true</span></code> it will only copy files
+that are BIDS valid.</p></li>
+<li><p><strong>verbose</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<p>All the metadata of each file is read through the whole hierarchy
+and dumped into one side-car json file for each file copied.
+In practice this “unravels” the inheritance principle.</p>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="nb">pwd</span><span class="p">,</span><span class="w"> </span><span class="s">'bids-examples'</span><span class="p">,</span><span class="w"> </span><span class="s">'qmri_vfa'</span><span class="p">);</span>
+
+<span class="n">output_path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="nb">pwd</span><span class="p">,</span><span class="w"> </span><span class="s">'output'</span><span class="p">);</span>
+
+<span class="nb">filter</span><span class="w"> </span><span class="p">=</span><span class="w">  </span><span class="nb">struct</span><span class="p">(</span><span class="s">'modality'</span><span class="p">,</span><span class="w"> </span><span class="s">'anat'</span><span class="p">,</span>
+<span class="w">                 </span><span class="s">'sub'</span><span class="p">,</span><span class="w"> </span><span class="s">'01'</span><span class="p">);</span>
+
+<span class="n">pipeline_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'SPM12'</span><span class="p">;</span>
+
+<span class="n">bids</span><span class="p">.</span><span class="n">copy_to_derivative</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'pipeline_name'</span><span class="p">,</span><span class="w"> </span><span class="n">pipeline_name</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'out_path'</span><span class="p">,</span><span class="w"> </span><span class="n">output_path</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'filter'</span><span class="p">,</span><span class="w"> </span><span class="nb">filter</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'force'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'unzip'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                        </span><span class="s">'verbose'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/report.m">
+<span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="../mat/name/bids.report.html" title="Link to this definition"></a></dt>
+<dd><p>Create a short summary of the acquisition parameters of a BIDS dataset.</p>
+<p>The output can be saved to a markdown file and/or printed to the screen.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bids</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span>
+            <span class="s1">'filter'</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="o">...</span>
+            <span class="s1">'output_path'</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="o">...</span>
+            <span class="s1">'read_nifti'</span><span class="p">,</span> <span class="n">read_nifti</span><span class="p">,</span> <span class="o">...</span>
+            <span class="s1">'verbose'</span><span class="p">,</span> <span class="n">verbose</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>BIDS</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">structure</span></code></span>) – Path to BIDS dataset or output of bids.layout [Default = pwd]</p></li>
+<li><p><strong>filter</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">structure</span></code></span>) – Specifies which the subject, session, … to take as template.
+[Default = struct(‘sub’, ‘’, ‘ses’, ‘’)]. See bids.query
+for more information.</p></li>
+<li><p><strong>output_path</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – Folder where the report should be printed. If empty
+(default) then the output is sent to the prompt.</p></li>
+<li><p><strong>read_nifti</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – If set to <code class="docutils literal notranslate"><span class="pre">true</span></code> (default) the function will try to read the
+NIfTI file to get more information. This relies on the
+<code class="docutils literal notranslate"><span class="pre">spm_vol.m</span></code> function from SPM.</p></li>
+<li><p><strong>verbose</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – If set to <code class="docutils literal notranslate"><span class="pre">false</span></code> (default) the function does not
+output anything to the prompt.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/validate.m">
+<span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">root</span></em>, <em class="sig-param"><span class="pre">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="../mat/name/bids.validate.html" title="Link to this definition"></a></dt>
+<dd><p>BIDS Validator</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">sts</span><span class="p">,</span> <span class="n">msg</span><span class="p">]</span> <span class="o">=</span> <span class="n">bids</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>root</strong> – directory formatted according to BIDS [Default: pwd]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<ul class="simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">sts<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">0</span></code> if successful</p>
+</dd>
+</dl>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">msg<span class="colon">:</span></dt>
+<dd class="field-odd"><p>warning and error messages</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Command line version of the BIDS-Validator:
+<a class="reference external" href="https://github.com/bids-standard/bids-validator">https://github.com/bids-standard/bids-validator</a></p>
+<p>Web version:
+<a class="reference external" href="https://bids-standard.github.io/bids-validator/">https://bids-standard.github.io/bids-validator/</a></p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mat-+bids/diagnostic.m">
+<span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">diagnostic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="../mat/name/bids.diagnostic.html" title="Link to this definition"></a></dt>
+<dd><p>Create a diagnostic figure for a dataset.</p>
+<ul class="simple">
+<li><p>list the number of files for each subject split by:
+- modality
+- task (optional)</p></li>
+<li><p>list the number of trials for each event type</p></li>
+</ul>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diagnostic_table</span> <span class="o">=</span> <span class="n">diagnostic</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span> <span class="o">...</span>
+                              <span class="s1">'use_schema'</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="o">...</span>
+                              <span class="s1">'output_path'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="o">...</span>
+                              <span class="s1">'filter'</span><span class="p">,</span> <span class="n">struct</span><span class="p">(),</span> <span class="o">...</span>
+                              <span class="s1">'split_by'</span><span class="p">,</span> <span class="p">{</span><span class="s1">''</span><span class="p">})</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>BIDS</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">structure</span> <span class="pre">or</span> <span class="pre">char</span></code></span>) – BIDS directory name or BIDS structure (from <code class="docutils literal notranslate"><span class="pre">bids.layout</span></code>)</p></li>
+<li><p><strong>split_by</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell</span></code></span>) – splits results by a given BIDS entity (now only <code class="docutils literal notranslate"><span class="pre">task</span></code> is supported)</p></li>
+<li><p><strong>use_schema</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the parsing of the dataset
+will follow the bids-schema provided with bids-matlab.
+If set to <code class="docutils literal notranslate"><span class="pre">false</span></code> files just have to be of the form
+<code class="docutils literal notranslate"><span class="pre">sub-label_[entity-label]_suffix.ext</span></code> to be parsed.
+If a folder path is provided, then the schema contained
+in that folder will be used for parsing.</p></li>
+<li><p><strong>out_path</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">string</span></code></span>) – path to directory containing the derivatives</p></li>
+<li><p><strong>filter</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">structure</span> <span class="pre">or</span> <span class="pre">cell</span></code></span>) – list of filters to choose what files to copy (see bids.query)</p></li>
+<li><p><strong>trial_type_col</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – Optional. Name of the column containing the trial type.
+Defaults to <code class="docutils literal notranslate"><span class="pre">'trial_type'</span></code>.</p></li>
+<li><p><strong>verbose</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – Optional. Set to false to not show the figure.
+Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<section id="id1">
+<h2>Example<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">BIDS</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">layout</span><span class="p">(</span><span class="n">path_to_dataset</span><span class="p">);</span>
+<span class="n">diagnostic_table</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">diagnostic</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span><span class="w"> </span><span class="s">'output_path'</span><span class="p">,</span><span class="w"> </span><span class="nb">pwd</span><span class="p">);</span>
+<span class="n">diagnostic_table</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">diagnostic</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span><span class="w"> </span><span class="s">'split_by'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">'task'</span><span class="p">},</span><span class="w"> </span><span class="s">'output_path'</span><span class="p">,</span><span class="w"> </span><span class="nb">pwd</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<figure class="align-center" id="id2">
+<span id="fig-diagnostic"></span><img alt="../_images/MultisubjectMultimodalFaceProcessing.png" src="../_images/MultisubjectMultimodalFaceProcessing.png" />
+<figcaption>
+<p><span class="caption-text">output of <code class="docutils literal notranslate"><span class="pre">diagnostic</span></code></span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id3">
+<span id="fig-diagnostic-events"></span><img alt="../_images/Simon-task_func_Simontask.png" src="../_images/Simon-task_func_Simontask.png" />
+<figcaption>
+<p><span class="caption-text">output of <code class="docutils literal notranslate"><span class="pre">diagnostic</span></code> for events</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id4">
+<span id="fig-diagnostic-task"></span><img alt="../_images/MultisubjectMultimodalFaceProcessing_splitby-task.png" src="../_images/MultisubjectMultimodalFaceProcessing_splitby-task.png" />
+<figcaption>
+<p><span class="caption-text">output of <code class="docutils literal notranslate"><span class="pre">diagnostic</span></code> split by task</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utility_functions.html" class="btn btn-neutral float-right" title="Utility functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, BIDS-MATLAB developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maintenance &mdash; bids-matlab v0.3.0
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=19ed39ba"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/mat_urls.js?v=fdbe6872"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Private API" href="private_api.html" />
+    <link rel="prev" title="Documentation for developers" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bids-matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../general_information.html">BIDS for MATLAB / Octave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout_query.html">Indexing and querying a BIDS dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../file.html">BIDS file handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stats_model.html">BIDS stats model handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../variable_transformations.html">Variable transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../schema.html">Using the BIDS schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation for developers</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Maintenance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#updating-the-bids-schema">Updating the bids-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#release-protocol">Release protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="private_api.html">Private API</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bids-matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Documentation for developers</a></li>
+      <li class="breadcrumb-item active">Maintenance</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developper_doc/maintenance.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="maintenance">
+<h1>Maintenance<a class="headerlink" href="#maintenance" title="Link to this heading"></a></h1>
+<section id="updating-the-bids-schema">
+<h2>Updating the bids-schema<a class="headerlink" href="#updating-the-bids-schema" title="Link to this heading"></a></h2>
+<p>The <a class="reference external" href="https://bids.neuroimaging.io/standards/schema/index.html">schema of the BIDS specification</a> is available as a JSON file here: https://bids-specification.readthedocs.io/en/latest/schema.json</p>
+<p>The latest version can be obtained by running the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>update_schema
+</pre></div>
+</div>
+<p>A new version of the schema is fetched automatically regularly via continuous integration
+(see the <a class="reference external" href="https://github.com/bids-standard/bids-matlab/blob/main/.github/workflows/update_schema.yml">github action</a>) when pushing to the repo
+or opening a pull-request.</p>
+</section>
+<section id="release-protocol">
+<h2>Release protocol<a class="headerlink" href="#release-protocol" title="Link to this heading"></a></h2>
+<p>General steps to follow when making a new release.</p>
+<ul class="simple">
+<li><p>[ ] create a dedicated branch for the release candidate</p></li>
+<li><p>[ ] update version in <code class="docutils literal notranslate"><span class="pre">citation.cff</span></code></p></li>
+<li><p>[ ] documentation related</p>
+<ul>
+<li><p>[ ] ensure the documentation is up to date</p></li>
+<li><p>[ ] make sure the doc builds correctly and fix any error</p></li>
+</ul>
+</li>
+<li><p>[ ] update jupyter books</p></li>
+<li><p>[ ] update binder</p></li>
+<li><p>[ ] update changelog</p>
+<ul>
+<li><p>[ ] change from <code class="docutils literal notranslate"><span class="pre">[unreleased]</span></code> to the version number</p></li>
+<li><p>[ ] remove unused sections (like <code class="docutils literal notranslate"><span class="pre">security</span></code>)</p></li>
+</ul>
+</li>
+<li><p>[ ] run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">release</span></code></p></li>
+<li><p>[ ] open a pull request (PR) from this release candidate branch targeting the default branch</p></li>
+<li><p>[ ] fix any remaining failing continuous integration (test, markdown and code linting…)</p></li>
+<li><p>[ ] merge to default branch</p></li>
+<li><p>[ ] create a github tagged release</p></li>
+<li><p>[ ] after release</p>
+<ul>
+<li><p>[ ] set version in <code class="docutils literal notranslate"><span class="pre">citation.cff</span></code> to dev</p></li>
+<li><p>[ ] update changelog</p>
+<ul>
+<li><p>[ ] add an <code class="docutils literal notranslate"><span class="pre">[unreleased]</span></code> section</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Documentation for developers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="private_api.html" class="btn btn-neutral float-right" title="Private API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, BIDS-MATLAB developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

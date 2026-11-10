@@ -1,0 +1,470 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIDS stats model handling &mdash; bids-matlab v0.3.0
+ documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19ed39ba"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/mat_urls.js?v=fdbe6872"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Variable transformations" href="variable_transformations.html" />
+    <link rel="prev" title="BIDS file handling" href="file.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            bids-matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="general_information.html">BIDS for MATLAB / Octave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layout_query.html">Indexing and querying a BIDS dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file.html">BIDS file handling</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BIDS stats model handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mat-+bids/Model.m"><code class="docutils literal notranslate"><span class="pre">Model</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="variable_transformations.html">Variable transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schema.html">Using the BIDS schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developper_doc/index.html">Documentation for developers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">bids-matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">BIDS stats model handling</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/stats_model.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bids-stats-model-handling">
+<h1>BIDS stats model handling<a class="headerlink" href="#bids-stats-model-handling" title="Link to this heading"></a></h1>
+<p>See the <a class="reference external" href="https://bids-standard.github.io/stats-models">BIDS stats model website</a>
+for more information.</p>
+<dl class="mat folder">
+<dt class="sig sig-object mat" id="mat-+bids/">
+<span class="property"><span class="pre">namespace</span> </span><span class="sig-name descname"><span class="pre">bids</span></span><a class="headerlink" href="mat/name/bids.html" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m">
+<span class="property"><span class="pre">class</span> </span><span class="sig-prename descclassname"><span class="pre">bids.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><a class="headerlink" href="mat/name/bids.Model.html" title="Link to this definition"></a></dt>
+<dd><p>Class to deal with BIDS stats models</p>
+<p>See the <a class="reference external" href="https://bids-standard.github.io/stats-models">BIDS stats model website</a>
+for more information.</p>
+<p>USAGE:: matlab</p>
+<blockquote>
+<div><dl class="simple">
+<dt>bm = bids.Model(‘init’, true, …</dt><dd><p>‘file’, path_to_bids_stats_model_file, …
+‘tolerant’, true,
+‘verbose’, false);</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>init</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – if <code class="docutils literal notranslate"><span class="pre">true</span></code> this will initialize an empty model. Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><strong>file</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">path</span></code></span>) – fullpath the JSON file containing the BIDS stats model</p></li>
+<li><p><strong>tolerant</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – turns errors into warning</p></li>
+<li><p><strong>verbose</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">logical</span></code></span>) – silences warnings</p></li>
+</ul>
+</dd>
+</dl>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% initialize and write an empty model</span>
+<span class="n">bm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">Model</span><span class="p">(</span><span class="s">'init'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="nb">pwd</span><span class="p">,</span><span class="w"> </span><span class="s">'model-foo_smdl.json'</span><span class="p">);</span>
+<span class="n">bm</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% load a stats model from a file</span>
+<span class="n">model_file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="n">get_test_data_dir</span><span class="p">(),</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                      </span><span class="s">'..'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                      </span><span class="s">'data'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                      </span><span class="s">'model'</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s">'model-narps_smdl.json'</span><span class="p">]);</span>
+
+<span class="n">bm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">Model</span><span class="p">(</span><span class="s">'file'</span><span class="p">,</span><span class="w"> </span><span class="n">model_file</span><span class="p">,</span><span class="w"> </span><span class="s">'verbose'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="members docutils container">
+<dl>
+<dt>Property Summary</dt><dd><dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.content">
+<span class="sig-name descname"><span class="pre">content</span></span><span class="property"> <span class="pre">=</span> <span class="pre">''</span></span><a class="headerlink" href="mat/name/bids.Model.content.html" title="Link to this definition"></a></dt>
+<dd><p>“raw” content of a loaded JSON</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.Name">
+<span class="sig-name descname"><span class="pre">Name</span></span><span class="property"> <span class="pre">=</span> <span class="pre">'REQUIRED'</span></span><a class="headerlink" href="mat/name/bids.Model.Name.html" title="Link to this definition"></a></dt>
+<dd><p>Name of the model</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.Description">
+<span class="sig-name descname"><span class="pre">Description</span></span><span class="property"> <span class="pre">=</span> <span class="pre">'RECOMMENDED'</span></span><a class="headerlink" href="mat/name/bids.Model.Description.html" title="Link to this definition"></a></dt>
+<dd><p>Description of the model</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.BIDSModelVersion">
+<span class="sig-name descname"><span class="pre">BIDSModelVersion</span></span><span class="property"> <span class="pre">=</span> <span class="pre">'1.0.0'</span></span><a class="headerlink" href="mat/name/bids.Model.BIDSModelVersion.html" title="Link to this definition"></a></dt>
+<dd><p>Version of the model</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.Input">
+<span class="sig-name descname"><span class="pre">Input</span></span><span class="property"> <span class="pre">=</span> <span class="pre">'REQUIRED'</span></span><a class="headerlink" href="mat/name/bids.Model.Input.html" title="Link to this definition"></a></dt>
+<dd><p>Input of the model</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.Nodes">
+<span class="sig-name descname"><span class="pre">Nodes</span></span><span class="property"> <span class="pre">=</span> <span class="pre">{'REQUIRED'}</span></span><a class="headerlink" href="mat/name/bids.Model.Nodes.html" title="Link to this definition"></a></dt>
+<dd><p>Nodes of the model</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.Edges">
+<span class="sig-name descname"><span class="pre">Edges</span></span><span class="property"> <span class="pre">=</span> <span class="pre">{}</span></span><a class="headerlink" href="mat/name/bids.Model.Edges.html" title="Link to this definition"></a></dt>
+<dd><p>Edges of the model</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.tolerant">
+<span class="sig-name descname"><span class="pre">tolerant</span></span><span class="property"> <span class="pre">=</span> <span class="pre">true</span></span><a class="headerlink" href="mat/name/bids.Model.tolerant.html" title="Link to this definition"></a></dt>
+<dd><p>if <code class="docutils literal notranslate"><span class="pre">true</span></code> turns error into warning</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><span class="property"> <span class="pre">=</span> <span class="pre">true</span></span><a class="headerlink" href="mat/name/bids.Model.verbose.html" title="Link to this definition"></a></dt>
+<dd><p>hides warning if <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.dag_built">
+<span class="sig-name descname"><span class="pre">dag_built</span></span><span class="property"> <span class="pre">=</span> <span class="pre">false</span></span><a class="headerlink" href="mat/name/bids.Model.dag_built.html" title="Link to this definition"></a></dt>
+<dd><p>if the directed acyclic graph has been built</p>
+</dd></dl>
+
+</dd>
+<dt>Method Summary</dt><dd><dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.get_nodes">
+<span class="sig-name descname"><span class="pre">get_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.get_nodes.html" title="Link to this definition"></a></dt>
+<dd><p>Get a specific node from the model given its Level and / or Name.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">value</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">bm</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">(</span><span class="s1">'Level'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="s1">'Name'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Level</strong> – Must be one of <code class="docutils literal notranslate"><span class="pre">Run</span></code>, <code class="docutils literal notranslate"><span class="pre">Session</span></code>, <code class="docutils literal notranslate"><span class="pre">Subject</span></code>, <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>.
+Default to <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+<li><p><strong>Name</strong> – Default to <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns: value - Node(s) as struct if there is only one or a cell if more</dt><dd><p>idx   - Node index</p>
+</dd>
+</dl>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">Model</span><span class="p">(</span><span class="s">'file'</span><span class="p">,</span><span class="w"> </span><span class="n">model_file</span><span class="p">(</span><span class="s">'narps'</span><span class="p">),</span><span class="w"> </span><span class="s">'verbose'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+
+<span class="c">% Get all nodes</span>
+<span class="n">bm</span><span class="p">.</span><span class="n">get_nodes</span><span class="p">()</span>
+
+<span class="c">% Get run level node</span>
+<span class="n">bm</span><span class="p">.</span><span class="n">get_nodes</span><span class="p">(</span><span class="s">'Level'</span><span class="p">,</span><span class="w"> </span><span class="s">'Run'</span><span class="p">)</span>
+
+<span class="c">% Get the "Negative" node</span>
+<span class="n">bm</span><span class="p">.</span><span class="n">get_nodes</span><span class="p">(</span><span class="s">'Name'</span><span class="p">,</span><span class="w"> </span><span class="s">'negative'</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.get_edge">
+<span class="sig-name descname"><span class="pre">get_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">field</span></em>, <em class="sig-param"><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.get_edge.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">edge</span> <span class="o">=</span> <span class="n">bm</span><span class="o">.</span><span class="n">get_edges</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>field can be any of {‘Source’, ‘Destination’}</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.get_edges_from_nodes">
+<span class="sig-name descname"><span class="pre">get_edges_from_nodes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.get_edges_from_nodes.html" title="Link to this definition"></a></dt>
+<dd><p>Generates all the default edges from the list of nodes in the model.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bm</span> <span class="o">=</span> <span class="n">bm</span><span class="o">.</span><span class="n">get_edges_from_nodes</span><span class="p">();</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">bm</span><span class="o">.</span><span class="n">Edges</span><span class="p">();</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.validate.html" title="Link to this definition"></a></dt>
+<dd><p>Very light validation of fields that were not checked on loading.
+Automatically run on loaoding of a dataset.</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bm</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.validate_edges">
+<span class="sig-name descname"><span class="pre">validate_edges</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.validate_edges.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bm</span><span class="o">.</span><span class="n">validate_edges</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.get_transformations">
+<span class="sig-name descname"><span class="pre">get_transformations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.get_transformations.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transformations</span> <span class="o">=</span> <span class="n">bm</span><span class="o">.</span><span class="n">get_transformations</span><span class="p">(</span><span class="s1">'Name'</span><span class="p">,</span> <span class="s1">'node_name'</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Name</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – name of the node whose transformations we want</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.get_dummy_contrasts">
+<span class="sig-name descname"><span class="pre">get_dummy_contrasts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.get_dummy_contrasts.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dummy_contrasts</span> <span class="o">=</span> <span class="n">bm</span><span class="o">.</span><span class="n">get_dummy_contrasts</span><span class="p">(</span><span class="s1">'Name'</span><span class="p">,</span> <span class="s1">'node_name'</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Name</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – name of the node whose dummy contrasts we want</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.get_contrasts">
+<span class="sig-name descname"><span class="pre">get_contrasts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.get_contrasts.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">contrasts</span> <span class="o">=</span> <span class="n">bm</span><span class="o">.</span><span class="n">get_contrasts</span><span class="p">(</span><span class="s1">'Name'</span><span class="p">,</span> <span class="s1">'node_name'</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Name</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – name of the node whose contrasts we want</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.get_model">
+<span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.get_model.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">bm</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s1">'Name'</span><span class="p">,</span> <span class="s1">'node_name'</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Name</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – name of the node whose model we want</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.get_design_matrix">
+<span class="sig-name descname"><span class="pre">get_design_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.get_design_matrix.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">matrix</span> <span class="o">=</span> <span class="n">bm</span><span class="o">.</span><span class="n">get_design_matrix</span><span class="p">(</span><span class="s1">'Name'</span><span class="p">,</span> <span class="s1">'node_name'</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Name</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span></code></span>) – name of the node whose model matrix we want</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.default">
+<span class="sig-name descname"><span class="pre">default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.default.html" title="Link to this definition"></a></dt>
+<dd><p>Generates a default BIDS stats model for a given data set</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bm</span> <span class="o">=</span> <span class="n">bm</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span> <span class="n">tasks</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>BIDS</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">path</span> <span class="pre">or</span> <span class="pre">structure</span></code></span>) – fullpath to a BIDS dataset or output structure from <code class="docutils literal notranslate"><span class="pre">bids.layout</span></code></p></li>
+<li><p><strong>tasks</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">char</span> <span class="pre">or</span> <span class="pre">cellstr</span></code></span>) – tasks to include in the model</p></li>
+</ul>
+</dd>
+</dl>
+<section id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">pth_bids_example</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">get_test_data_dir</span><span class="p">();</span>
+<span class="n">BIDS</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">layout</span><span class="p">(</span><span class="nb">fullfile</span><span class="p">(</span><span class="n">pth_bids_example</span><span class="p">,</span><span class="w"> </span><span class="s">'ds003'</span><span class="p">));</span>
+<span class="n">bm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bids</span><span class="p">.</span><span class="n">Model</span><span class="p">();</span>
+<span class="n">bm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bm</span><span class="p">.</span><span class="n">default</span><span class="p">(</span><span class="n">BIDS</span><span class="p">,</span><span class="w"> </span><span class="s">'rhymejudgement'</span><span class="p">);</span>
+<span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fullfile</span><span class="p">(</span><span class="nb">pwd</span><span class="p">,</span><span class="w"> </span><span class="s">'model-rhymejudgement_smdl.json'</span><span class="p">);</span>
+<span class="n">bm</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.update.html" title="Link to this definition"></a></dt>
+<dd><p>Update <code class="docutils literal notranslate"><span class="pre">content</span></code> for writing</p>
+<p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bm</span> <span class="o">=</span> <span class="n">bm</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.write.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat staticmethod">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.empty_node">
+<span class="property"><span class="pre">static</span> </span><span class="sig-name descname"><span class="pre">empty_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">level</span></em><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.empty_node.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="n">empty_node</span><span class="p">(</span><span class="s1">'run'</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat staticmethod">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.empty_transformations">
+<span class="property"><span class="pre">static</span> </span><span class="sig-name descname"><span class="pre">empty_transformations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.empty_transformations.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transformations</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="n">empty_transformations</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="mat staticmethod">
+<dt class="sig sig-object mat" id="mat-+bids/Model.m.empty_model">
+<span class="property"><span class="pre">static</span> </span><span class="sig-name descname"><span class="pre">empty_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="mat/name/bids.Model.empty_model.html" title="Link to this definition"></a></dt>
+<dd><p>USAGE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="n">empty_model</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd>
+</dl>
+</div>
+</section>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="file.html" class="btn btn-neutral float-left" title="BIDS file handling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="variable_transformations.html" class="btn btn-neutral float-right" title="Variable transformations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, BIDS-MATLAB developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
